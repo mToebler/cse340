@@ -1,0 +1,15 @@
+/* Mark Tobler for CSE340 */
+:root {
+   --white: #ffffff;
+   --near_black: #3a3a3a;
+   --blue: #4c96d7;
+   --light_blue: #a6cbeb;
+   --dark_gray:#8b8b8b;
+   --gray:#bababa;
+
+   --title_font: 'New Tegomin', serif;
+   --body_font: 'Ubuntu', sans-serif;
+}
+
+/* fonts */
+/* font-family: 'New Tegomin', serif; */
