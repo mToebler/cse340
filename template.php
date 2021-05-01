@@ -23,7 +23,10 @@
    <?php include 'pages/nav.php';?>
 </nav>
 <main>
-   Main content!
+   <section>
+      <h1>Content Title Here</h1>
+      <article></article>
+   </section>
 </main>
 <footer>
    <?php include 'pages/footer.php';?>

@@ -9,7 +9,70 @@
 
    --title_font: 'New Tegomin', serif;
    --body_font: 'Ubuntu', sans-serif;
+
 }
 
 /* fonts */
 /* font-family: 'New Tegomin', serif; */
+
+body {
+   font-family: var(--body_font);
+}
+
+h1 {
+   font-family: var(--title_font);
+}
+
+.container {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: nowrap;
+}
+
+header > .container {
+   justify-content: space-between;
+}
+
+header > .container > img {
+   align-self: start;
+   max-width: 25%;
+}
+
+.login {
+   align-self: flex-end;
+   align-content: space-around;
+   font-family: var(--body_font);
+   /* font-size: 1em; */
+   font-size: 80%;
+   margin-right: 1.5em;
+}
+
+nav {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: nowrap;
+   justify-content: left;
+   background-color: var(--near_black);
+}
+
+nav > div {
+   margin: 1em;
+   /* font-family: var(--title_font); */
+   font-weight: bold;
+   font-size: 80%;
+   color: var(--white);
+   
+}
+
+nav > div:hover {
+   background-color: var(--blue);
+   outline-color: var(--blue);
+   color: var(--near_black);
+   cursor: default;
+}
+
+footer {
+   font-size: x-small;
+   text-align: center;
+   border-top: 2px solid;
+}
