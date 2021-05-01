@@ -5,9 +5,9 @@
 
 <html lang="en">
 <head>
-   <title>CSE340 Template</title>
+   <title>PHP Motors</title>
    <meta charset="utf-8">
-   <meta name="description" content="Template for CSE340 future pages">
+   <meta name="description" content="PHP Motors">
    <meta name="author" content="Mark Tobler">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="preconnect" href="https://fonts.gstatic.com">

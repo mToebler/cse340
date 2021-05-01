@@ -50,7 +50,7 @@ h3 {
    color: var(--blue);
    font-family: var(--title_font);
    font-weight: bold;
-   margin-block-end: -.6em;
+   margin-block: -.6em;
 }
 
 .container {
