@@ -16,7 +16,7 @@
 
 </head>
 <body>
-   <section>
+   <div>
 <header>
    <?php include 'pages/header.php';?>
 </header>
@@ -26,13 +26,13 @@
 <main>
    <section>
       <h1>Content Title Here</h1>
-      <article></article>
+      <!--Placeholder for future content<article><h2></h2></article>-->
    </section>
 </main>
 <footer>
    <?php include 'pages/footer.php';?>
 </footer>
-</section>
+</div>
 </body>
 </html>
 

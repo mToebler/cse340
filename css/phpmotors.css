@@ -33,6 +33,13 @@ body > section {
    align-self: center;
 }
 
+body > div {
+   background-color: var(--white);
+   margin: .5em;
+   border: 4px solid var(--blue);
+   align-self: center;
+}
+
 h1 {
    font-family: var(--title_font);
 }

@@ -3,7 +3,7 @@
    // echo __DIR__;
 ?>
 <div class="container">
-   <img src="/phpmotors/images/site/logo.png">
+   <img src="/phpmotors/images/site/logo.png" alt="phpmotors logo">
    <p class="login">
       My Account
 </p>
