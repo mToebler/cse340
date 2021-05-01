@@ -16,6 +16,7 @@
 
 </head>
 <body>
+   <section>
 <header>
    <?php include 'pages/header.php';?>
 </header>
@@ -31,6 +32,7 @@
 <footer>
    <?php include 'pages/footer.php';?>
 </footer>
+</section>
 </body>
 </html>
 

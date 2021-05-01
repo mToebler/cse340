@@ -16,7 +16,21 @@
 /* font-family: 'New Tegomin', serif; */
 
 body {
+   display: flex;
+   flex-direction: column;
    font-family: var(--body_font);
+   color: var(--near_black);
+   background-image: url("/phpmotors/images/site/checkerboard.jpg");
+   background-repeat: repeat;
+   background-size: 50%;
+   justify-content: center;
+}
+
+body > section {
+   background-color: var(--white);
+   margin: .5em;
+   border: 4px solid var(--blue);
+   align-self: center;
 }
 
 h1 {
@@ -26,7 +40,7 @@ h1 {
 .container {
    display: flex;
    flex-direction: row;
-   flex-wrap: nowrap;
+   flex-wrap: nowrap;   
 }
 
 header > .container {
@@ -53,6 +67,8 @@ nav {
    flex-wrap: nowrap;
    justify-content: left;
    background-color: var(--near_black);
+   /* width: min-content; */
+   font-size: 85%;
 }
 
 nav > div {
@@ -61,18 +77,24 @@ nav > div {
    font-weight: bold;
    font-size: 80%;
    color: var(--white);
+   /* transition: font-size 1s; */
+   /* transition: margin .01s; */
    
 }
 
 nav > div:hover {
    background-color: var(--blue);
+   font-size: 100%;
    outline-color: var(--blue);
    color: var(--near_black);
    cursor: default;
+   margin: .5em;
+   transform: scale(1.15);
 }
 
 footer {
    font-size: x-small;
    text-align: center;
    border-top: 2px solid;
+   padding: 0em 1em;
 }
