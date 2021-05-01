@@ -27,7 +27,7 @@
    <section>
       <h1>Welcome to PHP Motors!</h1>
       <article id="delorean">
-         <h3>DMC Delorean</h2>
+         <h3>DMC Delorean</h3>
          <p>3 Cup holders<br>Superman doors<br>Fuzzy dice!</p>
          <!-- <img class="hero_img" src="<?=$img_root?>/delorean.jpg" alt="DMC Delorean"> -->
          <!-- <btn src="<?=$img_root?>/site/own_today.png"> -->
@@ -49,7 +49,8 @@
          <div><img src="<?=$img_root?>/upgrades/flux-cap.png" alt="flux capacitor upgrade"><br><a href="">Flux Capacitor</a></div>
          <div><img src="<?=$img_root?>/upgrades/flame.jpg" alt="flame decals upgrade"><br><a href="">Flame Decals</a></div>
          <div><img src="<?=$img_root?>/upgrades/bumper_sticker.jpg" alt="Bumper Stickers upgrade"><br><a href="">Bumper Stickers </a></div>
-         <div><img src="<?=$img_root?>/upgrades/hub-cap.jpg" alt="hub caps upgrade"><br><a href="">Hub Caps</a></div>         
+         <div><img src="<?=$img_root?>/upgrades/hub-cap.jpg" alt="hub caps upgrade"><br><a href="">Hub Caps</a></div>   
+         </div>      
       </article>
    </section>
 </main>
