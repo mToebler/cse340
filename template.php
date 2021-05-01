@@ -1,5 +1,5 @@
 <?php
-
+   $img_root = "/phpmotors/images";
 ?>
 <!doctype html>
 
