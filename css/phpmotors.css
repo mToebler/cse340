@@ -6,6 +6,7 @@
    --light_blue: #a6cbeb;
    --dark_gray:#8b8b8b;
    --gray:#bababa;
+   --dark_blue: #0875d4;
 
    --title_font: 'New Tegomin', serif;
    --body_font: 'Ubuntu', sans-serif;
@@ -47,7 +48,7 @@ h2 {
 }
 
 h3 {
-   color: var(--blue);
+   color: var(--dark_blue);
    font-family: var(--title_font);
    font-weight: bold;
    margin-block: -.6em;
@@ -130,7 +131,7 @@ article {
    width: 80vw;
    margin:auto;
    font-size: small;
-   color: var(--blue);
+   color: var(--dark_blue);
 }
 
 #delorean {
@@ -164,10 +165,15 @@ article > input {
 
 .upgrades > div > div {
    width: 30vw;
-   height: 20;
+   height: 15vh;
    margin: auto;
    padding: .5em;
-   background-color: var(--blue);
+   background-color: var(--dark_blue);
+}
+
+.upgrades a {
+   text-decoration: none;
+   color: var(--white);
 }
 
 article > div > img {
@@ -181,7 +187,7 @@ article > div > img {
     flex-wrap: wrap;
  }
 
- @media screen and (min-width: 620px) {
+ @media screen and (min-width: 480px) {
    article > input {
       border: 1px;
       max-width: 12vw;
