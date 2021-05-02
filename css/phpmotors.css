@@ -128,7 +128,8 @@ section {
 }
 
 article {
-   width: 80vw;
+   /* width: 80vw; */
+   width: 80%;
    margin:auto;
    font-size: small;
    color: var(--dark_blue);
@@ -164,6 +165,7 @@ article > input {
 }
 
 .upgrades > div > div {
+   text-align: center;
    width: 30vw;
    height: 15vh;
    margin: auto;
@@ -181,12 +183,13 @@ article > div > img {
    height: 13vh;
    margin: auto;
 }
- .wrap_container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
- }
-
+ 
+.wrap_container {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: flex-start;
+}
  @media screen and (min-width: 480px) {
    article > input {
       border: 1px;
@@ -208,5 +211,25 @@ article > div > img {
       height: 40vh;
       /* background-position-x: x-end; */
    }
-   
+
+   article {
+      width: 40%;
+   }   
+
+   .wrap_container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+   }
+  
+   .reviews {
+      align-self: flex-start;
+      order: 2;
+      margin: 0;
+   }
+
+   .upgrades {
+      order: 1;
+   }
  }

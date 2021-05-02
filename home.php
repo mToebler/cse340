@@ -33,7 +33,8 @@
          <!-- <btn src="<?=$img_root?>/site/own_today.png"> -->
          <input type="image" name="own_today" src="<?=$img_root?>/site/own_today.png" alt="Own Today">
       </article>
-      <article>
+   <div class="wrap_container">
+      <article class="reviews">
          <h2>DMC Delorean Reviews</h2>
          <ul>
             <li>&quot;So fast, it's almost like traveling in time.&quot; (4/5)</li>
@@ -52,6 +53,7 @@
          <div><img src="<?=$img_root?>/upgrades/hub-cap.jpg" alt="hub caps upgrade"><br><a href="">Hub Caps</a></div>   
          </div>      
       </article>
+   </div>
    </section>
 </main>
 <footer>
