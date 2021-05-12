@@ -6,7 +6,9 @@
    --light_blue: #a6cbeb;
    --dark_gray:#8b8b8b;
    --gray:#bababa;
+   --light_gray: #f0f0f0;
    --dark_blue: #0875d4;
+   --darker_blue: #065eaa;
 
    --title_font: 'New Tegomin', serif;
    --body_font: 'Ubuntu', sans-serif;
@@ -25,6 +27,7 @@ body {
    background-repeat: repeat;
    background-size: 50%;
    justify-content: center;
+   min-width: 320px;
 }
 
 body > div {
@@ -51,7 +54,8 @@ h3 {
    color: var(--dark_blue);
    font-family: var(--title_font);
    font-weight: bold;
-   margin-block: -.6em;
+   margin-bottom: -1em;
+   /* margin-block-end: -.7em; */
 }
 
 .container {
@@ -101,11 +105,12 @@ nav > div {
 
 nav > div:hover {
    background-color: var(--blue);
-   font-size: 100%;
+   /* font-size: 90%;  */
    outline-color: var(--blue);
    color: var(--near_black);
    cursor: default;
-   margin: .5em;
+   font-family: var(--title_font);
+   margin: .75em;
    transform: scale(1.15);
 }
 
@@ -114,6 +119,11 @@ footer {
    text-align: center;
    border-top: 2px solid;
    padding: 0em 1em;
+}
+
+a {
+   text-decoration: none;
+   color: inherit;
 }
 
 .hero_img {
@@ -130,7 +140,8 @@ section {
 article {
    /* width: 80vw; */
    width: 80%;
-   margin:auto;
+   margin: auto;
+   /* margin: 0; */
    font-size: small;
    color: var(--dark_blue);
 }
@@ -233,3 +244,47 @@ article > div > img {
       order: 1;
    }
  }
+
+ legend {
+    font-weight: bold;
+ }
+
+form {
+   padding: .5rem;
+   min-width: 270px;
+}
+
+button {
+   font-family: var(--title_font);
+   font-weight: 900;
+   color: var(--darker_blue);
+   background-color: var(--light_gray);
+   border-width: 2px;
+   margin: .25rem;
+}
+
+.tinyButton {
+   font-weight: 300;
+   border-width: 1px;
+   margin: 0px;
+   font-size: .5em;
+}
+
+.activeLink {
+   color: var(--dark_blue);
+   margin-left: .5rem;
+   font-size: smaller;
+}
+
+.registering {
+   font-family: var(--title_font);
+   /* text-decoration: underline; */
+   font-size: larger;
+   font-weight: 900;
+   color: var(--darker_blue);
+}
+
+em {
+   font-size: smaller;
+   color: var(--dark_blue);
+}

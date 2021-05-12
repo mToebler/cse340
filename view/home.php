@@ -1,5 +1,7 @@
 <?php
    $img_root = "/phpmotors/images";
+   $doc_root = "/phpmotors";
+   $root = $_SERVER['DOCUMENT_ROOT'];  
 ?>
 <!doctype html>
 
@@ -10,18 +12,24 @@
    <meta name="description" content="PHP Motors">
    <meta name="author" content="Mark Tobler">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <script src="/phpmotors/js/phpmotors.js"></script>
    <link rel="preconnect" href="https://fonts.gstatic.com">
    <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
-   <link rel="stylesheet" href="css/phpmotors.css" media="screen">
+   <link rel="stylesheet" href="<?=$doc_root?>/css/phpmotors.css" media="screen">
 
 </head>
 <body>
    <div>
 <header>
-   <?php include 'pages/header.php';?>
+   <?php include "$root/phpmotors/pages/header.php";?>
 </header>
 <nav>
-   <?php include 'pages/nav.php';?>
+   <?=$navList?>
+   <?php 
+   //include "$root/phpmotors/pages/nav.php";
+   // echo $navList;
+   
+   ?>
 </nav>
 <main>
    <section>
@@ -57,7 +65,7 @@
    </section>
 </main>
 <footer>
-   <?php include 'pages/footer.php';?>
+   <?php include "$root/phpmotors/pages/footer.php";?>
 </footer>
 </div>
 </body>

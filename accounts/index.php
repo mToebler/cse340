@@ -28,13 +28,14 @@ $action = filter_input(INPUT_POST, 'action');
 
  switch ($action){
    case 'registration':
-      include 'view/registration.php';
+      include "$root/phpmotors/view/registration.php";
       break;
    case 'login':
-      include 'view/login.php';
+      include "$root/phpmotors/view/login.php";
       break;
 
    default:
-      include 'view/home.php';
+      include "$root/phpmotors/view/home.php";
 }
+
 ?>

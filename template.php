@@ -1,5 +1,6 @@
 <?php
    $img_root = "/phpmotors/images";
+   echo $navList;
 ?>
 <!doctype html>
 
@@ -21,7 +22,8 @@
    <?php include 'pages/header.php';?>
 </header>
 <nav>
-   <?php include 'pages/nav.php';?>
+   <? echo $navList; ?>
+   <?php //include 'pages/nav.php';?>
 </nav>
 <main>
    <section>
