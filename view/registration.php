@@ -30,29 +30,46 @@
 <main>
    <section>
       <h1>Register</h1>
-      <form action="./" id="register" method="POST" onsubmit="return false;">
-         <input type="hidden" id="action" name="action" value="registration">
+      
+      <?php
+         if (isset($message)) {
+            echo "<div class='err'> $message </div>";
+         }
+      ?>
+      <!-- NOTE: I've done this a bit differently that the activity onsubmit does a whole false thing so that the password will show. I submit using javascript.-->
+      <form action="/phpmotors/accounts/index.php" id="register" method="POST" onsubmit="return false;">
+         <input type="hidden" id="action" name="action" value="register">
          <fieldset>
             <legend>
                Enter account information
             </legend> 
             <div>
-               <label for="firstName">First Name:</label><br><input type="text" id="firstName" name="firstName" required>
+               <label for="firstName">First Name:</label><br>
+               <input type="text" id="fname" name="clientFirstname" required>
             </div>
             <div>
-               <label for="lastName">Last Name:</label><br><input type="text" id="lastName" name="lastName" required>
+               <label for="lastName">Last Name:</label><br>
+               <input type="text" id="lname" name="clientLastname" required>
             </div>
             <div>
-               <label for="email">Email:</label><br><input type="email" id="email" name="email" required>
+               <label for="email">Email:</label><br>
+               <input type="email" id="email" name="clientEmail" required>
             </div>
             <div>
-               <label for="password">Password:</label><br><input type="password" id="password" name="password" pattern="/[A-Z]+[a-z]+[0-9]+[\.\+\*\?\^\$\(\)\[\]\{\}\|\\\]+/" required><br>
+               <label for="password">Password:</label><br>
+               <input type="password" id="password" name="clientPassword" pattern="/[A-Z]+[a-z]+[0-9]+[\.\+\*\?\^\$\(\)\[\]\{\}\|\\\]+/" required><br>
                <em>Passwords must be at least 8 characters and contain at least 1 number, 1 capital letter, and 1 special character.</em>
                <br>
                <button class="tinyButton" onClick="showPass();">Show Password</button>
             </div>
          </fieldset>
-         <button type="submit" onCLick="submitMe();">Register</button>
+         <!-- <input type="submit" name="submit" id="regbtn" value="Register"> -->
+         <!-- NOTE: I'm doing something different than what's prescribed in the "activity. In order to get the password to change between text and password type, I think I need this. -->
+         <!-- NOTE: Changed the name submit to submitBtn so that the submit js would work.  -->
+         <button type="submit" name="submitBtn" id="regbtn" onCLick="submitMe();">Register</button>
+         <!-- Add the action name - value pair -->
+         <!-- I had already done a form of this above. It's a bit tedious that we have to be told to do this (yawn) -->
+         <!-- <input type="hidden" name="action" value="register"> -->
       </form>
    </section>
 </main>

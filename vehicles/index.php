@@ -1,9 +1,9 @@
 <?php 
+// VEHICLES CONTROLLER
 $root = $_SERVER['DOCUMENT_ROOT'];  
 require_once "$root/phpmotors/library/connections.php";
 require_once "$root/phpmotors/model/main-model.php";
-// pretty self evident. Do we really need a comment clarifying the accounts-model is being included below? 
-require_once "$root/phpmotors/model/accounts-model.php";
+// require_once "$root/phpmotors/model/accounts-model.php";
 
 // Get the array of classifications
 $classifications = getClassifications();
@@ -11,7 +11,7 @@ $classifications = getClassifications();
 // var_dump($classifications);
 // 	exit;
 
-// Build a navigation bar using the $classifications array
+// Build a dropdown list $classifications array
 $navList = '';
 $navList .= "<div><a href='/phpmotors/index.php' title='View the PHP Motors home page'>Home</a></div>";
 foreach ($classifications as $classification) {
@@ -22,6 +22,28 @@ $navList .= '';
 // echo $navList;
 // exit;
 
+$classificationsWIds = getClassificationsWIds();
+$classificationList = "";
+$classificationList .= "<label for='classification'>Choose a car:</label>";
+$classificationList .= "<select id='classification' name='classification'>";
+foreach ($classificationsWIds as $classification) {
+   $classificationList .= "<option value='$classification[classificationId]'>$classification[classificationName]</option>";
+}
+$classificationList .= "</select>";
+
+// var_dump($classificationList);
+// exit;
+
+// echo $classificationList;
+// exit;
+
+// <label for="cars">Choose a car:</label>
+// <select id="cars" name="cars">
+//   <option value="volvo">Volvo</option>
+//   <option value="saab">Saab</option>
+//   <option value="fiat">Fiat</option>
+//   <option value="audi">Audi</option>
+// </select>
 
 $action = filter_input(INPUT_POST, 'action');
  if ($action == NULL){
@@ -66,5 +88,15 @@ $action = filter_input(INPUT_POST, 'action');
    default:
       include "$root/phpmotors/view/home.php";
 }
+
+// array(5) { 
+//    [0]=> array(4) { 
+//       ["classificationId"]=> string(1) "2" [0]=> string(1) "2" ["classificationName"]=> string(7) "Classic" [1]=> string(7) "Classic" 
+//    } 
+//    [1]=> array(4) { ["classificationId"]=> string(1) "3" [0]=> string(1) "3" ["classificationName"]=> string(6) "Sports" [1]=> string(6) "Sports" } 
+//    [2]=> array(4) { ["classificationId"]=> string(1) "1" [0]=> string(1) "1" ["classificationName"]=> string(3) "SUV" [1]=> string(3) "SUV" } 
+//    [3]=> array(4) { ["classificationId"]=> string(1) "4" [0]=> string(1) "4" ["classificationName"]=> string(6) "Trucks" [1]=> string(6) "Trucks" } 
+//    [4]=> array(4) { ["classificationId"]=> string(1) "5" [0]=> string(1) "5" ["classificationName"]=> string(4) "Used" [1]=> string(4) "Used" } 
+// }
 
 ?>

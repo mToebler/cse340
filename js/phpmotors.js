@@ -9,5 +9,7 @@ function showPass() {
 }
  
 function submitMe() {
-   document.querySelector("form").submit();
+  console.log("submitting!"); 
+  
+  document.querySelector("form").submit();
 }

@@ -30,6 +30,11 @@
 <main>
    <section>
       <h1>Login</h1>
+      <?php
+         if (isset($message)) {
+            echo "<div class='err'> $message </div>";
+         }
+      ?>
       <form action="./" id="login" method="POST">
          <input type="hidden" id="action" name="action" value="login">
          <fieldset>
