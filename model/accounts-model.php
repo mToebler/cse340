@@ -27,3 +27,5 @@ function regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassw
    // Return the indication of success (rows changed)
    return $rowsChanged;
   }
+
+?>

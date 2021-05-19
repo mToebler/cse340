@@ -83,20 +83,9 @@ $action = filter_input(INPUT_POST, 'action');
          exit;
       }
       break;
-        
 
    default:
       include "$root/phpmotors/view/home.php";
 }
-
-// array(5) { 
-//    [0]=> array(4) { 
-//       ["classificationId"]=> string(1) "2" [0]=> string(1) "2" ["classificationName"]=> string(7) "Classic" [1]=> string(7) "Classic" 
-//    } 
-//    [1]=> array(4) { ["classificationId"]=> string(1) "3" [0]=> string(1) "3" ["classificationName"]=> string(6) "Sports" [1]=> string(6) "Sports" } 
-//    [2]=> array(4) { ["classificationId"]=> string(1) "1" [0]=> string(1) "1" ["classificationName"]=> string(3) "SUV" [1]=> string(3) "SUV" } 
-//    [3]=> array(4) { ["classificationId"]=> string(1) "4" [0]=> string(1) "4" ["classificationName"]=> string(6) "Trucks" [1]=> string(6) "Trucks" } 
-//    [4]=> array(4) { ["classificationId"]=> string(1) "5" [0]=> string(1) "5" ["classificationName"]=> string(4) "Used" [1]=> string(4) "Used" } 
-// }
 
 ?>
