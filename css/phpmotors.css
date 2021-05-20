@@ -9,7 +9,9 @@
    --light_gray: #f0f0f0;
    --dark_blue: #0875d4;
    --darker_blue: #065eaa;
+   --neon_black: #4f4f4f;
    --error: #aa0621;
+   --success: #06a621;
 
    --title_font: 'New Tegomin', serif;
    --body_font: 'Ubuntu', sans-serif;
@@ -43,6 +45,17 @@ h1 {
    font-family: var(--title_font);
    flex-grow: 5;
    width: 80vw;
+   color: var(--light_blue);
+   text-shadow:   0 0 7px black,
+                  0 0 10px var(--near_black),
+                  0 0 21px var(--near_black),
+                  0 0 42px var(--neon_black),
+                  0 0 82px var(--neon_black)
+                  /* 0 0 92px var(--neon_black) */
+                  /* 0 0 102px var(--neon_black) */
+                  /* 0 0 151px var(--neon_black) */
+
+
 }
 
 h2 {
@@ -134,7 +147,8 @@ a {
 
 section {
    display: flex;
-   flex-direction: row;
+   /* flex-direction: row; */
+   flex-direction: column;
    flex-wrap: wrap;
 }
 
@@ -294,4 +308,15 @@ em {
    font-family: var(--title_font);
    font-size: small;
    color: var(--error);
+}
+
+.err > div {
+   font-family: var(--title_font);
+   font-size: small;
+   color: var(--success);
+}
+
+#addInventoryForm input {
+   margin-bottom: .5em;
+   width: 60vw;
 }
