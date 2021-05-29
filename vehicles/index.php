@@ -22,11 +22,11 @@ $navList .= '';
 // echo $navList;
 // exit;
 
-$classificationsWIds = getClassificationsWIds();
+// $classificationsWIds = getClassificationsWIds();
 $classificationList = "";
-$classificationList .= "<label for='classification'>Choose a car:</label>";
-$classificationList .= "<select id='classification' name='classification'>";
-foreach ($classificationsWIds as $classification) {
+$classificationList .= "<select id='classificationId' name='classificationId'>";
+$classificationList .= "<option value=''>Select classification...</option>";
+foreach ($classifications as $classification) {
    $classificationList .= "<option value='$classification[classificationId]'>$classification[classificationName]</option>";
 }
 $classificationList .= "</select>";
@@ -34,7 +34,7 @@ $classificationList .= "</select>";
 // just classification drop down with no label
 $justClassificationList = "";
 $justClassificationList .= "<select id='classificationId' name='classificationId'>";
-foreach ($classificationsWIds as $classification) {
+foreach ($classifications as $classification) {
    $justClassificationList .= "<option value='$classification[classificationId]'>$classification[classificationName]</option>";
 }
 $justClassificationList .= "</select>";

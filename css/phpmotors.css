@@ -44,13 +44,16 @@ body > div {
 h1 {
    font-family: var(--title_font);
    flex-grow: 5;
-   width: 80vw;
-   color: var(--light_blue);
+   width: 86vw;
+   font-size: 1.85em;
+   margin: 0.2em 0em -0.1em 0.3em;
+   color: var(--dark_blue);
+   font-variant-caps: petite-caps;
    text-shadow:   0 0 7px black,
                   0 0 10px var(--near_black),
                   0 0 21px var(--near_black),
-                  0 0 42px var(--neon_black),
-                  0 0 82px var(--neon_black)
+                  0 0 42px var(--neon_black)
+                  /* 0 0 82px var(--neon_black) */
                   /* 0 0 92px var(--neon_black) */
                   /* 0 0 102px var(--neon_black) */
                   /* 0 0 151px var(--neon_black) */
@@ -261,12 +264,27 @@ article > div > img {
  }
 
  legend {
-    font-weight: bold;
+    font-weight: bold;    
  }
 
 form {
    padding: .5rem;
    min-width: 270px;
+}
+
+form legend, form label {
+   color: var(--dark_blue);
+}
+
+form label {
+   font-weight: bold;
+   font-size: 0.8rem;
+}
+
+form select {
+   background-color: var(--light_gray);
+   color: var(--darker_blue);
+   font-family: var(--body_font);
 }
 
 button {
@@ -276,6 +294,8 @@ button {
    background-color: var(--light_gray);
    border-width: 2px;
    margin: .25rem;
+   border-style: solid;
+   border-color: var(--light_blue);
 }
 
 .tinyButton {
@@ -307,7 +327,10 @@ em {
 .err {
    font-family: var(--title_font);
    font-size: small;
+   font-weight: 900;
    color: var(--error);
+   margin: -0.4em 0em -1.1em 0.8em;
+   width: 60vw;
 }
 
 .err > div {

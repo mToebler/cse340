@@ -48,10 +48,10 @@
                Classifications:
             </legend> 
             <div>
-               <label for="current_classifications">Current:</label><br><?=$justClassificationList?>
+               <label for="classificationId">Current:</label><br><?=$justClassificationList?>
             </div>
             <div>
-               <label for="new_classification">New:</label><br><input type="text" id="classificationName" name="classificationName">
+               <label for="classificationName">New:</label><br><input type="text" id="classificationName" name="classificationName">
             </div>
          </fieldset>
          <button type="submit">Create</button>

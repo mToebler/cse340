@@ -65,7 +65,7 @@
                <label for="invColor">Color:</label><br><input type="text" id="invColor" name="invColor">
             </div>
             <div>
-               <label for="classificationId">Classification:</label><br><?=$justClassificationList?>
+               <label for="classificationId">Classification:</label><br><?=$classificationList?>
             </div>
          </fieldset>
          <button type="submit">Add</button>
