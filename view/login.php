@@ -35,17 +35,22 @@
             echo "<div class='err'> $message </div>";
          }
       ?>
-      <form action="./" id="login" method="POST">
-         <input type="hidden" id="action" name="action" value="login">
+      <form action="/phpmotors/accounts/index.php" id="login" method="POST">
+         <input type="hidden" id="action" name="action" value="Login">
          <fieldset>
             <legend>
                Enter credientials
             </legend> 
             <div>
-               <label for="email">email:</label><br><input type="email" id="email" name="email">
+               <label for="email">email:</label><br><input type="email" id="email" name="email" 
+               <?
+                  if(isset($email)) echo "value='$email'";
+               ?>
+               required>
             </div>
             <div>
-               <label for="password">password:</label><br><input type="password" id="password" name="password">
+               <label for="password">password:</label><br><input type="password" id="password" name="password" required> <br>
+               <em>Not repeating password requirements or pattern matching here as these weaken password integrity.</em>
             </div>
          </fieldset>
          <button type="submit">Sign-in</button>

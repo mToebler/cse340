@@ -45,19 +45,27 @@
             </legend> 
             <div>
                <label for="firstName">First Name:</label><br>
-               <input type="text" id="fname" name="clientFirstname" required>
+               <input type="text" id="fname" name="clientFirstname" required 
+                  <? 
+                     if(isset($clientFirstname)) echo "value='$clientFirstname'"; 
+                  ?>
+               >
             </div>
             <div>
                <label for="lastName">Last Name:</label><br>
-               <input type="text" id="lname" name="clientLastname" required>
+               <input type="text" id="lname" name="clientLastname" required <? if(isset($clientLastname)) echo "value='$clientLastname'"; ?> >
             </div>
             <div>
                <label for="email">Email:</label><br>
-               <input type="email" id="email" name="clientEmail" required>
+               <input type="email" id="email" name="clientEmail" required 
+                  <? 
+                     if(isset($clientEmail)) echo "value='$clientEmail'"; 
+                  ?>
+               >
             </div>
             <div>
                <label for="password">Password:</label><br>
-               <input type="password" id="password" name="clientPassword" pattern="/[A-Z]+[a-z]+[0-9]+[\.\+\*\?\^\$\(\)\[\]\{\}\|\\\]+/" required><br>
+               <input type="password" id="password" name="clientPassword" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required><br>
                <em>Passwords must be at least 8 characters and contain at least 1 number, 1 capital letter, and 1 special character.</em>
                <br>
                <button class="tinyButton" onClick="showPass();">Show Password</button>

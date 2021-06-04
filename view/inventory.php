@@ -2,8 +2,17 @@
    $img_root = "/phpmotors/images";
    $doc_root = "/phpmotors";
    $root = $_SERVER['DOCUMENT_ROOT'];  
-?>
-<!doctype html>
+   
+   $classificationList = "";
+   if (!isset($classificationId)) {
+      $classificationList = buildClassificationDropdown($classifications, "Select classification...");
+   } else {
+      $classificationList = buildClassificationDropdown($classifications, "Select classification...", $classificationId);
+   }
+   // var_dump($classificationId);
+   // echo '<br>';
+   // var_dump($classificationList);
+?><!doctype html>
 
 <html lang="en">
 <head>
@@ -41,30 +50,60 @@
                Add inventory:
             </legend> 
             <div>
-               <label for="invMake">Make:</label><br><input type="text" id="invMake" name="invMake">
+               <label for="invMake">Make:</label><br>
+               <input type="text" id="invMake" name="invMake" required
+                  <? 
+                     if(isset($invMake)) echo "value='$invMake'"; 
+                  ?>
+               >
             </div>
             <div>
-               <label for="invModel">Model:</label><br><input type="text" id="invModel" name="invModel">
+               <label for="invModel">Model:</label><br>
+               <input type="text" id="invModel" name="invModel" required
+                  <? 
+                     if(isset($invModel)) echo "value='$invModel'"; 
+                  ?>
+               >
             </div>
             <div>
-               <label for="invDescription">Description:</label><br><input type="text" id="invDescription" name="invDescription">
+               <label for="invDescription">Description:</label><br>
+               <textarea id="invDescription" name="invDescription" required><? 
+                     if(isset($invDescription)) echo "$invDescription"; 
+                  ?></textarea>
             </div>
             <div>
-               <label for="invImage">Image:</label><br><input type="text" id="invImage" name="invImage" value="/phpmotors/images/no-image.png">
+               <label for="invImage">Image:</label><br>
+               <input type="text" id="invImage" name="invImage" value="/phpmotors/images/no-image.png" required>
             </div>
             <div>
-               <label for="invThumbnail">Thumbnail:</label><br><input type="text" id="invThumbnail" name="invThumbnail" value="/phpmotors/images/no-image.png">
+               <label for="invThumbnail">Thumbnail:</label><br>
+               <input type="text" id="invThumbnail" name="invThumbnail" value="/phpmotors/images/no-image.png" required>
             </div>
             <div>
-               <label for="invPrice">Price:</label><br><input type="number" id="invPrice" name="invPrice" value="0">
+               <label for="invPrice">Price:</label><br>
+               <input type="number" step="any" id="invPrice" name="invPrice" value="1" required
+                  <? 
+                     if(isset($invPrice)) echo "value='$invPrice'"; 
+                  ?>
+               >
             </div>
             <div>
-               <label for="invStock">Quantity:</label><br><input type="number" id="invStock" name="invStock" value="1">
+               <label for="invStock">Quantity:</label><br>
+               <input type="number" id="invStock" name="invStock" value="1" required
+                  <? 
+                     if(isset($invStock)) echo "value='$invStock'"; 
+                  ?>
+               >
             </div>
             <div>
-               <label for="invColor">Color:</label><br><input type="text" id="invColor" name="invColor">
+               <label for="invColor">Color:</label><br>
+               <input type="color" id="invColor" name="invColor" required
+                  <? 
+                     if(isset($invColor)) echo "value='$invColor'"; 
+                  ?>
+               >
             </div>
-            <div>
+            <div>               
                <label for="classificationId">Classification:</label><br><?=$classificationList?>
             </div>
          </fieldset>

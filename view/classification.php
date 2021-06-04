@@ -51,7 +51,12 @@
                <label for="classificationId">Current:</label><br><?=$justClassificationList?>
             </div>
             <div>
-               <label for="classificationName">New:</label><br><input type="text" id="classificationName" name="classificationName">
+               <label for="classificationName">New:</label><br>
+               <input type="text" id="classificationName" name="classificationName" required
+                  <? 
+                     if (isset($classificationName)) echo "value='$classificationName'";
+                  ?>
+               >
             </div>
          </fieldset>
          <button type="submit">Create</button>

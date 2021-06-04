@@ -2,6 +2,7 @@
 // VEHICLES CONTROLLER
 $root = $_SERVER['DOCUMENT_ROOT'];  
 require_once "$root/phpmotors/library/connections.php";
+require_once "$root/phpmotors/library/functions.php";
 require_once "$root/phpmotors/model/main-model.php";
 require_once "$root/phpmotors/model/vehicles-model.php";
 
@@ -11,35 +12,14 @@ $classifications = getClassifications();
 // var_dump($classifications);
 // 	exit;
 
-// Build a dropdown list $classifications array
-$navList = '';
-$navList .= "<div><a href='/phpmotors/index.php' title='View the PHP Motors home page'>Home</a></div>";
-foreach ($classifications as $classification) {
- $navList .= "<div><a href='/phpmotors/index.php?action=".urlencode($classification['classificationName'])."' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></div>";
-}
-$navList .= '';
-
+$navList = buildNav($classifications);
 // echo $navList;
 // exit;
 
-// $classificationsWIds = getClassificationsWIds();
-$classificationList = "";
-$classificationList .= "<select id='classificationId' name='classificationId'>";
-$classificationList .= "<option value=''>Select classification...</option>";
-foreach ($classifications as $classification) {
-   $classificationList .= "<option value='$classification[classificationId]'>$classification[classificationName]</option>";
-}
-$classificationList .= "</select>";
-
 // just classification drop down with no label
-$justClassificationList = "";
-$justClassificationList .= "<select id='classificationId' name='classificationId'>";
-foreach ($classifications as $classification) {
-   $justClassificationList .= "<option value='$classification[classificationId]'>$classification[classificationName]</option>";
-}
-$justClassificationList .= "</select>";
+$justClassificationList = buildClassificationDropdown($classifications, "Current classifications...");
 
-// echo $classificationList;
+// var_dump($classificationList);
 // exit;
 
 // <label for="cars">Choose a car:</label>
@@ -67,7 +47,7 @@ switch ($action){
    break;
 
    case 'creatClassification':
-      $classificationName = filter_input(INPUT_POST, 'classificationName');
+      $classificationName = filter_input(INPUT_POST, 'classificationName', FILTER_SANITIZE_STRING);
       if(empty($classificationName)){
          $message = '<p>Classification names must be an alpha-numeric sequences longer than 0 characters.</p>';
          include "$root/phpmotors/view/classification.php";
@@ -87,20 +67,25 @@ switch ($action){
    break;
 
    case 'createInventory':
-      $invMake = filter_input(INPUT_POST, 'invMake');
-      $invModel = filter_input(INPUT_POST, 'invModel');
-      $invDescription = filter_input(INPUT_POST, 'invDescription');
-      $invImage = filter_input(INPUT_POST, 'invImage');
-      $invThumbnail = filter_input(INPUT_POST, 'invThumbnail');
-      $invPrice = filter_input(INPUT_POST, 'invPrice');
-      $invStock = filter_input(INPUT_POST, 'invStock');
-      $invColor = filter_input(INPUT_POST, 'invColor');
-      $classificationId = filter_input(INPUT_POST, 'classificationId');
+      $invMake = trim(filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_STRING));
+      $invModel = trim(filter_input(INPUT_POST, 'invModel', FILTER_SANITIZE_STRING));
+      $invDescription = trim(filter_input(INPUT_POST, 'invDescription', FILTER_SANITIZE_STRING));
+      $invImage = trim(filter_input(INPUT_POST, 'invImage', FILTER_SANITIZE_STRING));
+      $invThumbnail = trim(filter_input(INPUT_POST, 'invThumbnail', FILTER_SANITIZE_STRING));
+      $invPrice = trim(filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_NUMBER_INT, FILTER_FLAG_ALLOW_FRACTION));
+      $invStock = trim(filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_INT));
+      $invColor = trim(filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_STRING));
+      $classificationId = trim(filter_input(INPUT_POST, 'classificationId', FILTER_SANITIZE_NUMBER_INT));
+   
+      //NOTE: Custom validation functions
+      $colorMatch = checkColor($invColor);
+      $classIdMatch = isPropertyInArray($classificationId, "classificationId", $classifications);      
+      
       
       if(empty($invMake) || empty($invModel) || empty($invDescription) || 
          empty($invImage) || empty($invThumbnail) || empty($invPrice) || 
-         empty($invStock) || empty($invColor) || empty($classificationId)) {
-         $message = '<p>All fields are required</p>';
+         empty($invStock) || !$colorMatch || !$classIdMatch) {
+         $message = '<p>All fields require valid values</p>';
          include "$root/phpmotors/view/inventory.php";
          exit; 
       }
@@ -108,11 +93,15 @@ switch ($action){
       // Check and report the result
      
       if($invOutcome === 1){
-         $message = "<div><p>$invMake added.</p></div>";
+         $message = "<div><p>$invMake $invModel added.</p></div>";
+         //clearing out all variables:
+         unset($invMake); unset($invModel); unset($invDescription); 
+         unset($invPrice); unset($invImage); unset($invThumbnail); 
+         unset($invStock); unset($invColor); unset($classificationId);
          include "$root/phpmotors/view/inventory.php";
          exit;
       } else {
-         $message = "<p>Sorry $invMake was not added to inventory. Please try again.</p>";
+         $message = "<p>Sorry, $invMake $invModel was not added to inventory. Please try again.</p>";
          include "$root/phpmotors/view/inventory.php";
          exit;
       }
