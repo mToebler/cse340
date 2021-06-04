@@ -81,7 +81,7 @@
             </div>
             <div>
                <label for="invPrice">Price:</label><br>
-               <input type="number" step="any" id="invPrice" name="invPrice" value="1" required
+               <input type="number" step="any" id="invPrice" name="invPrice" default="1" required
                   <? 
                      if(isset($invPrice)) echo "value='$invPrice'"; 
                   ?>
@@ -89,7 +89,7 @@
             </div>
             <div>
                <label for="invStock">Quantity:</label><br>
-               <input type="number" id="invStock" name="invStock" value="1" required
+               <input type="number" id="invStock" name="invStock" default="1" required
                   <? 
                      if(isset($invStock)) echo "value='$invStock'"; 
                   ?>
@@ -97,7 +97,7 @@
             </div>
             <div>
                <label for="invColor">Color:</label><br>
-               <input type="color" id="invColor" name="invColor" required
+               <input type="color" id="invColor" name="invColor"
                   <? 
                      if(isset($invColor)) echo "value='$invColor'"; 
                   ?>
