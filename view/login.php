@@ -31,9 +31,13 @@
    <section>
       <h1>Login</h1>
       <?php
-         if (isset($message)) {
-            echo "<div class='err'> $message </div>";
-         }
+      // needed to rework this just a touch.
+      if (isset($_SESSION['message'])) {
+         $msg = "<div class='err'>";
+         $msg .= $_SESSION['message'];
+         $msg .= "</div>";
+         echo $msg;         
+        }      
       ?>
       <form action="/phpmotors/accounts/index.php" id="login" method="POST">
          <input type="hidden" id="action" name="action" value="Login">

@@ -1,5 +1,7 @@
 <?php 
 // VEHICLES CONTROLLER
+// Create or access a Session
+session_start();
 $root = $_SERVER['DOCUMENT_ROOT'];  
 require_once "$root/phpmotors/library/connections.php";
 require_once "$root/phpmotors/library/functions.php";

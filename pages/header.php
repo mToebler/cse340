@@ -5,12 +5,19 @@
 //  if ($action == NULL){
 //   $action = filter_input(INPUT_GET, 'action');
 //  }
-
+// Check if the firstname cookie exists, get its value
+if (isset($_COOKIE['firstName'])) {
+   $cookieFirstname = filter_input(INPUT_COOKIE, 'firstName', FILTER_SANITIZE_STRING);   
+}
 ?>
 <div class="container">
    <img src="<?=$img_root?>/site/logo.png" alt="phpmotors logo">
    <p class="login">
       <?php
+         if (isset($cookieFirstname))  {
+            echo "<span>Welcome $cookieFirstname!</span><br>";
+         }
+            
          if ($action != NULL && ($action == "registration" || $action == "login")) {
       ?>
       <a class="registering" href="/phpmotors/accounts/index.php?action=login">My Account</a>

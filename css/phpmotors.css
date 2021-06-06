@@ -341,6 +341,9 @@ em {
    color: var(--success);
 }
 
+.whoa{
+   font-size: xx-small;
+}
 #addInventoryForm input, #addInventoryForm textarea {
    margin-bottom: .5em;
    width: 60vw;

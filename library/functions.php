@@ -59,7 +59,7 @@ function buildNav($navArray)
    return $navList;
 }
 
-function buildClassificationDropdown($navArray, $optionalMessage='None', $currentValue=NULL)
+function buildClassificationDropdown($navArray, $optionalMessage = 'None', $currentValue = NULL)
 {
    // echo "\n\n classificationId is: $currentValue\n\n";
    $classificationList = "";
@@ -72,13 +72,27 @@ function buildClassificationDropdown($navArray, $optionalMessage='None', $curren
       foreach ($navArray as $classification) {
          $classificationList .= "<option value='$classification[classificationId]'";
          $classificationList .= $currentValue == $classification['classificationId'] ? $selected : $notSelected;
-         $classificationList .=">$classification[classificationName]</option>";         
+         $classificationList .= ">$classification[classificationName]</option>";
       }
    } else {
       foreach ($navArray as $classification) {
          $classificationList .= "<option value='$classification[classificationId]'>$classification[classificationName]</option>";
-      }      
+      }
    }
-   $classificationList .= "</select>";      
+   $classificationList .= "</select>";
    return $classificationList;
+}
+
+
+// Get client data based on an email address
+function getClient($clientEmail)
+{
+   $db = phpmotorsConnect();
+   $sql = 'SELECT clientId, clientFirstname, clientLastname, clientEmail, clientLevel, clientPassword FROM clients WHERE clientEmail = :clientEmail';
+   $stmt = $db->prepare($sql);
+   $stmt->bindValue(':clientEmail', $clientEmail, PDO::PARAM_STR);
+   $stmt->execute();
+   $clientData = $stmt->fetch(PDO::FETCH_ASSOC);
+   $stmt->closeCursor();
+   return $clientData;
 }

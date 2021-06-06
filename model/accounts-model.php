@@ -28,4 +28,23 @@ function regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassw
    return $rowsChanged;
   }
 
+  // Duplicate email check
+  function isDuplicateEmail($email) {   
+    $db = phpmotorsConnect();
+    // the database should enforce unique keys here, however, this is a fallback.
+    $sql = "SELECT clientEmail FROM `clients` WHERE clientEmail = :clientEmail";
+    $stmt = $db->prepare($sql);
+    $stmt->bindvalue(':clientEmail', $email, PDO::PARAM_STR);
+    // and run
+    $stmt->execute();
+    //  fetching one record only or 
+    $isMatch = $stmt->fetch(PDO::FETCH_NUM);
+    $stmt->closeCursor();
+    // go against the grain here. Returning true or false
+    // empty array() which evaluates to false and null
+    // why not ===? in case null gets returned.    
+    return $isMatch != array();
+
+  }
+
 ?>
