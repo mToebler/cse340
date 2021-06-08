@@ -37,7 +37,7 @@ switch ($action) {
    case 'Login':
       $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
       $clientEmail = checkEmail($clientEmail);
-      $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
+      $clientPassword = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
       $passwordCheck = checkPassword($clientPassword);
 
       // Run basic checks, return if errors
@@ -52,7 +52,9 @@ switch ($action) {
       $clientData = getClient($clientEmail);
       // Compare the password just submitted against
       // the hashed password for the matching client
-      $hashCheck = password_verify($clientPassword, $clientData['clientPassword']);
+      /// NOTE: had to change this to avoid an warning when $clientData returns nothing.
+      /// NOTE: getClient returns a false, not an empty array() although the two are falsy equivalents
+      $hashCheck = $clientData ? password_verify($clientPassword, $clientData['clientPassword']) : false;
       // If the hashes don't match create an error
       // and return to the login view
       if (!$hashCheck) {
@@ -61,7 +63,7 @@ switch ($action) {
          exit;
       }
       // A valid user exists, log them in
-      $_SESSION['loggedin'] = TRUE;
+      $_SESSION['loggedin'] = $hashCheck;
       // Remove the password from the array
       // the array_pop function removes the last
       // element from an array
@@ -69,7 +71,8 @@ switch ($action) {
       // Store the array into the session
       $_SESSION['clientData'] = $clientData;
       // Send them to the admin view
-      include '../view/admin.php';
+      // header('Location: /phpmotors/view/admin.php');
+      include("../view/admin.php");
       exit;
    case 'register':
       $clientFirstname = trim(filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING));
@@ -119,7 +122,6 @@ switch ($action) {
       }
       break;
 
-
    default:
-      include "$root/phpmotors/view/home.php";
+      include "$root/phpmotors/view/admin.php";
 }

@@ -6,6 +6,7 @@
 //   $action = filter_input(INPUT_GET, 'action');
 //  }
 // Check if the firstname cookie exists, get its value
+// session_unset();  
 if (isset($_COOKIE['firstName'])) {
    $cookieFirstname = filter_input(INPUT_COOKIE, 'firstName', FILTER_SANITIZE_STRING);   
 }
@@ -15,7 +16,7 @@ if (isset($_COOKIE['firstName'])) {
    <p class="login">
       <?php
          if (isset($cookieFirstname))  {
-            echo "<span>Welcome $cookieFirstname!</span><br>";
+            echo "<span><a href='/phpmotors/accounts/index.php?action=admin'>Welcome $cookieFirstname!</a></span><br>";
          }
             
          if ($action != NULL && ($action == "registration" || $action == "login")) {
