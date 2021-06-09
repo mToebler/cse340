@@ -70,7 +70,13 @@ switch ($action) {
       array_pop($clientData);
       // Store the array into the session
       $_SESSION['clientData'] = $clientData;
-      // Send them to the admin view
+      // For backward compatibility, setting a cookie here with the first 
+      // name. Making it a session cookie
+      setcookie("firstName", $clientData['clientFirstname'], strtotime("+1 year"), "/");
+      // echo $_SESSION['clientData']['clientFirstname'];
+      // echo $clientData['clientFirstname'];
+      // exit;
+      // // // Send them to the admin view
       // header('Location: /phpmotors/view/admin.php');
       include("../view/admin.php");
       exit;
@@ -108,7 +114,7 @@ switch ($action) {
 
       // Check and report the result
       if ($regOutcome === 1) {
-         //cookie time!
+         //cookie time! Awesome, however, setcookie here is awkward. It should be in login functionality.
          setcookie("firstName", $clientFirstname, strtotime("+1 year"), "/");
 
          $_SESSION['message'] = "<div>Thanks for registering $clientFirstname. Please use your email and password to login.</div>";
@@ -127,6 +133,8 @@ switch ($action) {
          session_unset();
          // session destroyed
          session_destroy();
+         // I'm also going to remove the cookie with the name.
+         setcookie("firstName", "", strtotime("-1 year"), "/");
          // client is returned to the main phpmotors controller
          header("Location: /phpmotors/index.php");
          exit;

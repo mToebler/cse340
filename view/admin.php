@@ -17,7 +17,7 @@ if (!$_SESSION['loggedin']) {
 <html lang="en">
 
 <head>
-   <title>CSE340 Template</title>
+   <title>PHPMotors Admin</title>
    <meta charset="utf-8">
    <meta name="description" content="Admin view for CSE340 PHPMotors account">
    <meta name="author" content="Mark Tobler">
@@ -38,7 +38,7 @@ if (!$_SESSION['loggedin']) {
       </nav>
       <main>
          <section>
-            <h1><?=$_SESSION['clientData']['clientFirstname'].$_SESSION['clientData']['clientLastname']?></h1>
+            <h1><?=$_SESSION['clientData']['clientFirstname'].' '.$_SESSION['clientData']['clientLastname']?></h1>
             <ul>
                <?php
                $cStr = 'client';
