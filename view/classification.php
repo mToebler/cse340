@@ -9,6 +9,12 @@
    //    $justClassificationList .= "<option value='$classification[classificationId]'>$classification[classificationName]</option>";
    // }
    // $justClassificationList .= "</select>";
+   
+   if ($_SESSION['clientData']['clientLevel'] < 2 || !$_SESSION['loggedin']) {
+      header("Location: /phpmotors/index.php ");
+      exit;
+   }
+            
 ?>
 <!doctype html>
 

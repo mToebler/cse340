@@ -2,6 +2,13 @@
    $img_root = "/phpmotors/images";
    $doc_root = "/phpmotors";
    $root = $_SERVER['DOCUMENT_ROOT'];  
+
+   if ($_SESSION['clientData']['clientLevel'] < 2 || !$_SESSION['loggedin']) {
+      header("Location: /phpmotors/index.php ");
+      exit;
+   }
+
+   
 ?>
 <!doctype html>
 

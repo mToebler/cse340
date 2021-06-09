@@ -49,7 +49,17 @@ if (!$_SESSION['loggedin']) {
                }
                ?>
             </ul>
-            <!--Placeholder for future content<article><h2></h2></article>-->
+            <?php
+               if ($_SESSION['clientData']['clientLevel'] > 1) {
+            ?>
+            <article>
+               <h2>Admin controls</h2>
+               <p><a href="/phpmotors/vehicles/">Vehicle Administration</a></p>
+            </article>
+            <?php
+               }
+            ?>
+            
          </section>
       </main>
       <footer>

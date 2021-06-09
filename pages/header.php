@@ -16,17 +16,20 @@ if (isset($_COOKIE['firstName'])) {
    <p class="login">
       <?php
          if (isset($cookieFirstname))  {
-            echo "<span><a href='/phpmotors/accounts/index.php?action=admin'>Welcome $cookieFirstname!</a></span><br>";
+            echo "<span><a href='/phpmotors/accounts/index.php?action=admin'>Welcome $cookieFirstname!</a></span><br>";            
          }
-            
-         if ($action != NULL && ($action == "registration" || $action == "login")) {
+          if (isset($_SESSION['loggedin']) && $_SESSION['loggedin']) {
+            echo "<a class='registering' href='/phpmotors/accounts/index.php?action=Logout'>Logout</a>";
+          }  else {
+               if ($action != NULL && ($action == "registration" || $action == "login")) {
       ?>
       <a class="registering" href="/phpmotors/accounts/index.php?action=login">My Account</a>
       <?php 
-         } else {
+               } else {
       ?>
       <a href="/phpmotors/index.php?action=login">My Account</a>
       <?php 
+               }
          }
       ?>
 </p>

@@ -122,6 +122,15 @@ switch ($action) {
       }
       break;
 
+      case 'Logout':
+         // session data should be unset
+         session_unset();
+         // session destroyed
+         session_destroy();
+         // client is returned to the main phpmotors controller
+         header("Location: /phpmotors/index.php");
+         exit;
+      break;
    default:
       include "$root/phpmotors/view/admin.php";
 }
