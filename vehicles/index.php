@@ -178,6 +178,39 @@ switch ($action) {
          exit;
       }
       break;
+   case 'del':
+      $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+      $invInfo = getInvItemInfo($invId);
+      if (count($invInfo) < 1) {
+         $message = 'Sorry, no vehicle information could be found.';
+      }
+      include "$root/phpmotors/view/vehicleDelete.php";
+      exit;
+      break;
+   case 'deleteVehicle':
+      $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+      $invMake = trim(filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_STRING));
+      $invModel = trim(filter_input(INPUT_POST, 'invModel', FILTER_SANITIZE_STRING));      
+
+      //NOTE: Custom validation functions
+      $colorMatch = checkColor($invColor);
+      $classIdMatch = isPropertyInArray($classificationId, "classificationId", $classifications);
+
+      $deleteResult = deleteVehicle($invId);
+      // Check and report the result
+
+      if ($deleteResult === 1) {
+         $message = "<div><p>$invMake $invModel deleted.</p></div>";
+         $_SESSION['message'] =  $message;
+         header("Location: /phpmotors/vehicles/");
+         exit;
+      } else {
+         $message = "<p>$invMake $invModel NOT deleted.</p>";
+         $_SESSION['message'] =  $message;
+         header("Location: /phpmotors/vehicles/");
+         exit;
+      }
+      break;
 
    default:
       $classificationList = buildClassificationList($classifications);
