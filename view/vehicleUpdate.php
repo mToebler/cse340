@@ -79,25 +79,24 @@ if (!isset($classificationId) && !isset($selectedClassification)) {
             ?>
             <form action="/phpmotors/vehicles/index.php" id="modifyInventoryForm" method="POST">
                <input type="hidden" id="action" name="action" value="updateVehicle">
+               <input type="hidden" name="invId" value="<?php if (isset($invInfo['invId'])) {
+                     echo $invInfo['invId'];
+                  } elseif (isset($invId)) {
+                     echo $invId;
+                  } ?>">
                <fieldset>
                   <legend>
                      Modify inventory:
                   </legend>
                   <div>
                      <label for="invMake">Make:</label><br>
-                     <input type="text" id="invMake" name="invMake" required 
-                     <? 
-                     if(isset($invMake)) echo "value='$invMake'";  
-                     else if(isset($invInfo['invMake'])) echo "value='$invInfo[invMake]'";  
-                     ?>
-                     > <!-- close element-->
+                     <input type="text" id="invMake" name="invMake" required <? if(isset($invMake)) echo "value='$invMake'" ; else if(isset($invInfo['invMake'])) echo "value='$invInfo[invMake]'" ; ?>
+                     >
+                     <!-- close element-->
                   </div>
                   <div>
                      <label for="invModel">Model:</label><br>
-                     <input type="text" id="invModel" name="invModel" required <? 
-                     if(isset($invModel)) echo "value='$invModel'" ; 
-                     else if(isset($invInfo['invModel'])) echo "value='$invInfo[invModel]'";  
-                     ?>
+                     <input type="text" id="invModel" name="invModel" required <? if(isset($invModel)) echo "value='$invModel'" ; else if(isset($invInfo['invModel'])) echo "value='$invInfo[invModel]'" ; ?>
                      >
                   </div>
                   <div>
@@ -117,30 +116,17 @@ if (!isset($classificationId) && !isset($selectedClassification)) {
                   </div>
                   <div>
                      <label for="invPrice">Price:</label><br>
-                     <input type="number" step="any" id="invPrice" name="invPrice" required 
-                     <? 
-                     if(isset($invPrice)) echo "value='$invPrice'" ; 
-                     else if(isset($invInfo['invPrice'])) echo "value='$invInfo[invPrice]'";  
-                     else echo 'value="1"' ; ?>
+                     <input type="number" step="any" id="invPrice" name="invPrice" required <? if(isset($invPrice)) echo "value='$invPrice'" ; else if(isset($invInfo['invPrice'])) echo "value='$invInfo[invPrice]'" ; else echo 'value="1"' ; ?>
                      >
                   </div>
                   <div>
                      <label for="invStock">Quantity:</label><br>
-                     <input type="number" id="invStock" name="invStock" required 
-                     <? 
-                     if(isset($invStock)) echo "value='$invStock'" ; 
-                     else if(isset($invInfo['invStock'])) echo "value='$invInfo[invStock]'";  
-                     else echo 'value="1"' ; 
-                     ?>
+                     <input type="number" id="invStock" name="invStock" required <? if(isset($invStock)) echo "value='$invStock'" ; else if(isset($invInfo['invStock'])) echo "value='$invInfo[invStock]'" ; else echo 'value="1"' ; ?>
                      >
                   </div>
                   <div>
                      <label for="invColor">Color:</label><br>
-                     <input type="color" id="invColor" name="invColor" 
-                     <? 
-                     if(isset($invColor)) echo "value='$invColor'" ; 
-                     else if(isset($invInfo['invColor'])) echo "value='$invInfo[invColor]'";  
-                     ?>
+                     <input type="color" id="invColor" name="invColor" <? if(isset($invColor)) echo "value='$invColor'" ; else if(isset($invInfo['invColor'])) echo "value='$invInfo[invColor]'" ; ?>
                      >
                   </div>
                   <div>

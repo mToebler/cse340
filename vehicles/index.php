@@ -138,6 +138,46 @@ switch ($action) {
       include "$root/phpmotors/view/vehicleUpdate.php";
       exit;
       break;
+   case 'updateVehicle':
+      $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+      $invMake = trim(filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_STRING));
+      $invModel = trim(filter_input(INPUT_POST, 'invModel', FILTER_SANITIZE_STRING));
+      $invDescription = trim(filter_input(INPUT_POST, 'invDescription', FILTER_SANITIZE_STRING));
+      $invImage = trim(filter_input(INPUT_POST, 'invImage', FILTER_SANITIZE_STRING));
+      $invThumbnail = trim(filter_input(INPUT_POST, 'invThumbnail', FILTER_SANITIZE_STRING));
+      $invPrice = trim(filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_NUMBER_INT, FILTER_FLAG_ALLOW_FRACTION));
+      $invStock = trim(filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_INT));
+      $invColor = trim(filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_STRING));
+      $classificationId = trim(filter_input(INPUT_POST, 'classificationId', FILTER_SANITIZE_NUMBER_INT));
+
+      //NOTE: Custom validation functions
+      $colorMatch = checkColor($invColor);
+      $classIdMatch = isPropertyInArray($classificationId, "classificationId", $classifications);
+
+
+      if (
+         empty($invMake) || empty($invModel) || empty($invDescription) ||
+         empty($invImage) || empty($invThumbnail) || empty($invPrice) ||
+         empty($invStock) || !$colorMatch || !$classIdMatch
+      ) {
+         $message = '<p>All fields require valid values</p>';
+         include "$root/phpmotors/view/vehicleUpdate.php";
+         exit;
+      }
+      $updateResult = updateVehicle($invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId, $invId);
+      // Check and report the result
+
+      if ($updateResult === 1) {
+         $message = "<div><p>$invMake $invModel updated.</p></div>";
+         $_SESSION['message'] =  $message;
+         header("Location: /phpmotors/vehicles/");
+         exit;
+      } else {
+         $message = "<p>Sorry, $invMake $invModel was not updated. Please try again.</p>";
+         include "$root/phpmotors/view/vehicleUpdate.php";
+         exit;
+      }
+      break;
 
    default:
       $classificationList = buildClassificationList($classifications);

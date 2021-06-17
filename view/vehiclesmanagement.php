@@ -7,6 +7,9 @@ if ($_SESSION['clientData']['clientLevel'] < 2 || !$_SESSION['loggedin']) {
    header("Location: /phpmotors/index.php ");
    exit;
 }
+if (isset($_SESSION['message'])) {
+   $message = $_SESSION['message'];
+  }
 
 
 ?>
@@ -46,7 +49,7 @@ if ($_SESSION['clientData']['clientLevel'] < 2 || !$_SESSION['loggedin']) {
                <p><a href="/phpmotors/vehicles/index.php?action=inventory">Add inventory</a></p>
                <?php
                if (isset($message)) {
-                  echo $message;
+                  echo "<div class='err'>$message</div>";
                }
                if (isset($classificationList)) {
                   echo '<h2>Vehicles By Classification</h2>';
@@ -69,3 +72,4 @@ if ($_SESSION['clientData']['clientLevel'] < 2 || !$_SESSION['loggedin']) {
 </body>
 
 </html>
+<?php unset($_SESSION['message']); ?>
