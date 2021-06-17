@@ -1,24 +1,24 @@
 /* Mark Tobler for CSE340 */
+
 :root {
    --white: #ffffff;
    --near_black: #3a3a3a;
    --blue: #4c96d7;
    --light_blue: #a6cbeb;
-   --dark_gray:#8b8b8b;
-   --gray:#bababa;
+   --dark_gray: #8b8b8b;
+   --gray: #bababa;
    --light_gray: #f0f0f0;
    --dark_blue: #0875d4;
    --darker_blue: #065eaa;
    --neon_black: #4f4f4f;
    --error: #aa0621;
    --success: #06a621;
-
    --title_font: 'New Tegomin', serif;
    --body_font: 'Ubuntu', sans-serif;
-
 }
 
 /* fonts */
+
 /* font-family: 'New Tegomin', serif; */
 
 body {
@@ -33,7 +33,7 @@ body {
    min-width: 320px;
 }
 
-body > div {
+body>div {
    background-color: var(--white);
    margin: .5em;
    border: 4px solid var(--blue);
@@ -49,18 +49,16 @@ h1 {
    margin: 0.2em 0em -0.1em 0.3em;
    color: var(--dark_blue);
    font-variant-caps: petite-caps;
-    /* text-shadow:   0 0 7px black,
+   /* text-shadow:   0 0 7px black,
                   0 0 10px var(--near_black),
                   0 0 21px var(--near_black),
                   0 0 42px var(--neon_black); */
-                  /* 0 0 82px var(--neon_black) */
-                  /* 0 0 92px var(--neon_black) */
-                  /* 0 0 102px var(--neon_black) */
-                  /* 0 0 151px var(--neon_black) */
-
-                  /* color: rgba(0,0,0,0.6); */
-text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
-                  0px -5px 35px rgba(255,255,255,0.3);
+   /* 0 0 82px var(--neon_black) */
+   /* 0 0 92px var(--neon_black) */
+   /* 0 0 102px var(--neon_black) */
+   /* 0 0 151px var(--neon_black) */
+   /* color: rgba(0,0,0,0.6); */
+   text-shadow: 2px 8px 6px rgba(0, 0, 0, 0.2), 0px -5px 35px rgba(255, 255, 255, 0.3);
 }
 
 h2 {
@@ -80,14 +78,14 @@ h3 {
 .container {
    display: flex;
    flex-direction: row;
-   flex-wrap: nowrap;   
+   flex-wrap: nowrap;
 }
 
-header > .container {
+header>.container {
    justify-content: space-between;
 }
 
-header > .container > img {
+header>.container>img {
    align-self: start;
    max-width: 25%;
 }
@@ -111,7 +109,7 @@ nav {
    font-size: 85%;
 }
 
-nav > div {
+nav>div {
    margin: 1em;
    /* font-family: var(--title_font); */
    font-weight: bold;
@@ -119,10 +117,9 @@ nav > div {
    color: var(--white);
    /* transition: font-size 1s; */
    /* transition: margin .01s; */
-   
 }
 
-nav > div:hover {
+nav>div:hover {
    background-color: var(--blue);
    /* font-size: 90%;  */
    outline-color: var(--blue);
@@ -174,12 +171,12 @@ article {
    /* background-position-x: x-end; */
 }
 
-article > p {
+article>p {
    align-self: flex-start;
    /* left:20%; */
 }
 
-article > input {
+article>input {
    border: 1px;
    max-width: 30vw;
    align-self: flex-end;
@@ -195,7 +192,7 @@ article > input {
    justify-content: space-around;
 }
 
-.upgrades > div > div {
+.upgrades>div>div {
    text-align: center;
    width: 30vw;
    height: 15vh;
@@ -209,28 +206,28 @@ article > input {
    color: var(--white);
 }
 
-article > div > img {
+article>div>img {
    /* width: 30vw; */
    height: 13vh;
    margin: auto;
 }
- 
+
 .wrap_container {
    display: flex;
    flex-direction: row;
    flex-wrap: wrap;
    justify-content: flex-start;
 }
- @media screen and (min-width: 480px) {
-   article > input {
+
+@media screen and (min-width: 480px) {
+   article>input {
       border: 1px;
       max-width: 12vw;
       align-self: flex-start;
       order: 5;
       padding-left: 0vw;
       padding-top: 0%;
-   }      
-
+   }
    #delorean {
       background-image: url("/phpmotors/images/delorean.jpg");
       /* background-size: 75%; */
@@ -242,32 +239,28 @@ article > div > img {
       height: 40vh;
       /* background-position-x: x-end; */
    }
-
    article {
       width: 40%;
-   }   
-
+   }
    .wrap_container {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: space-between;
    }
-  
    .reviews {
       align-self: flex-start;
       order: 2;
       margin: 0;
    }
-
    .upgrades {
       order: 1;
    }
- }
+}
 
- legend {
-    font-weight: bold;    
- }
+legend {
+   font-weight: bold;
+}
 
 form {
    padding: .5rem;
@@ -286,7 +279,7 @@ form label {
 form select {
    background-color: var(--light_gray);
    color: var(--darker_blue);
-   font-family: var(--body_font);   
+   font-family: var(--body_font);
 }
 
 button {
@@ -335,15 +328,16 @@ em {
    width: 60vw;
 }
 
-.err > div {
+.err>div {
    font-family: var(--title_font);
    font-size: small;
    color: var(--success);
 }
 
-.whoa{
+.whoa {
    font-size: xx-small;
 }
+
 #addInventoryForm input, #addInventoryForm textarea {
    margin-bottom: .5em;
    width: 60vw;
@@ -351,7 +345,22 @@ em {
 }
 
 #addInventoryForm textarea {
-/* rows="3" cols="30" */
+   /* rows="3" cols="30" */
    height: auto;
    /* width: 60vw; */
+}
+
+th {
+   font-family: var(--title_font);
+   color: var(--near_black);
+   text-align: start;
+   text-decoration: underline;
+}
+
+td {
+   color: var(--near_black);
+}
+
+td>a {
+   color: var(--dark_blue);
 }
