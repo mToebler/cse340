@@ -39,21 +39,34 @@ if (!$_SESSION['loggedin']) {
       <main>
          <section>
             <h1><?=$_SESSION['clientData']['clientFirstname'].' '.$_SESSION['clientData']['clientLastname']?></h1>
+            <? if (isset($_SESSION['message']) && $_SESSION['message'] != '') echo "<div class='err'><p>$_SESSION[message]</p></div>";
+            ?>
+            <p class='info'>You are logged in</p>
             <ul>
                <?php
                $cStr = 'client';
                foreach($_SESSION['clientData'] as $key => $value) {
-                  $str = substr($key, strlen($cStr));
+                  $str = substr($key, strlen($cStr));                  
                   // var_dump($str); exit;
-                  echo "<li>$str: $value</li>";
+                  // using blacklisting here. Whitelisting would be better if this 
+                  // strategy is to be maintained
+                  if ($str != 'Id' && $str != 'Level')
+                     echo "<li>$str: $value</li>";
                }
                ?>
             </ul>
+
+            <article>
+               <h2>Account Management</h2>
+               <p class='info'>Update account information using link below. Clearly the link text itself isn't enough to guide you, right?</p>
+               <p><a href="/phpmotors/accounts/?action=update">Update Account Management</a></p>
+            </article>
             <?php
                if ($_SESSION['clientData']['clientLevel'] > 1) {
             ?>
             <article>
                <h2>Admin controls</h2>
+               <p class='info'>Use the link to administer inventory.</p>
                <p><a href="/phpmotors/vehicles/">Vehicle Administration</a></p>
             </article>
             <?php
@@ -69,3 +82,6 @@ if (!$_SESSION['loggedin']) {
 </body>
 
 </html>
+<?php 
+$_SESSION['message'] = '';
+?>

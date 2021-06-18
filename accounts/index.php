@@ -120,7 +120,7 @@ switch ($action) {
          $_SESSION['message'] = "<div>Thanks for registering $clientFirstname. Please use your email and password to login.</div>";
 
          header('Location: /phpmotors/accounts/?action=login');
-         exit; 
+         exit;
       } else {
          $message = "<p>Sorry $clientFirstname, but the registration failed. Please try again.</p>";
          include '../view/registration.php';
@@ -128,16 +128,83 @@ switch ($action) {
       }
       break;
 
-      case 'Logout':
-         // session data should be unset
-         session_unset();
-         // session destroyed
-         session_destroy();
-         // I'm also going to remove the cookie with the name.
-         setcookie("firstName", "", strtotime("-1 year"), "/");
-         // client is returned to the main phpmotors controller
-         header("Location: /phpmotors/index.php");
+   case 'Logout':
+      // session data should be unset
+      session_unset();
+      // session destroyed
+      session_destroy();
+      // I'm also going to remove the cookie with the name.
+      setcookie("firstName", "", strtotime("-1 year"), "/");
+      // client is returned to the main phpmotors controller
+      header("Location: /phpmotors/index.php");
+      exit;
+      break;
+   case 'update':
+      include "$root/phpmotors/view/client-update.php";
+      break;
+   case 'updateClient':
+      $clientFirstname = trim(filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING));
+      $clientLastname = trim(filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING));
+      $clientEmail = trim(filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL));
+      $clientId = trim(filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT));
+
+      $clientEmail = checkEmail($clientEmail);
+
+      if (empty($clientFirstname) || empty($clientLastname) || empty($clientEmail)) {
+         $message = '<p>Please provide information for all empty form fields.</p>';
+         include "$root/phpmotors/view/client-update.php";
          exit;
+      }
+      // echo $clientFirstname, $clientLastname, $clientEmail, $clientId; exit;
+      $updateInfoOutcome = updateClient($clientFirstname, $clientLastname, $clientEmail, $clientId);
+
+      if ($updateInfoOutcome === 1) {
+         // need to refresh user info!!         
+         $clientData = getClientById($clientId);
+         // get rid of password
+         array_pop($clientData);
+         $_SESSION['clientData'] = $clientData;
+
+         $_SESSION['message'] = "<div>$clientFirstname, Your information has been updated.</div>";
+         header('Location: /phpmotors/accounts/');
+         exit;
+      } else {
+         $message = "<p>Sorry $clientFirstname, but the update failed. Please try again.</p>";
+         include '../view/client-update.php';
+         exit;
+      }
+      break;
+   case 'updatePassword':
+      // get the submitted information
+      $clientPassword = trim(filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING));
+      $clientId = trim(filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT));
+      // make sure password meets the criteria
+      $checkPassword = checkPassword($clientPassword);
+      
+      // Check for correct data
+      if (empty($checkPassword)) {
+         $pwMessage = '<p>Password must meet the stated requirements.</p>';
+         include "$root/phpmotors/view/client-update.php";
+         exit;
+      }
+
+      // Hash the checked password
+      $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
+      $updateOutcome = updatePw($hashedPassword, $clientId);
+
+      // Check and report the result
+      if ($updateOutcome === 1) {
+         //cookie time! Awesome, however, setcookie here is awkward. It should be in login functionality.
+         $name = $_SESSION['clientData']['clientFirstname'];
+         // I guess i could have just used concatenation =/
+         $_SESSION['message'] = "<div>$name, your password has been updated.</div>";
+         header('Location: /phpmotors/accounts/');
+         exit;
+      } else {
+         $pwMessage = "<p>Sorry $clientFirstname, but the registration failed. Please try again.</p>";
+         include '../view/client-update.php';
+         exit;
+      }
       break;
    default:
       include "$root/phpmotors/view/admin.php";

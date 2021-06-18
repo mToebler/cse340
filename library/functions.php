@@ -97,6 +97,19 @@ function getClient($clientEmail)
    return $clientData;
 }
 
+// Get client data based on an Id
+function getClientById($clientId)
+{
+   $db = phpmotorsConnect();
+   $sql = 'SELECT clientId, clientFirstname, clientLastname, clientEmail, clientLevel, clientPassword FROM clients WHERE clientId = :clientId';
+   $stmt = $db->prepare($sql);
+   $stmt->bindValue(':clientId', $clientId, PDO::PARAM_INT);
+   $stmt->execute();
+   $clientData = $stmt->fetch(PDO::FETCH_ASSOC);
+   $stmt->closeCursor();
+   return $clientData;
+}
+
 // Build the classifications select list 
 // stopped at activity section: getInventoryByClassification() Function 
 function buildClassificationList($classifications)

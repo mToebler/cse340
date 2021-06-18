@@ -82,7 +82,7 @@ if ($_SESSION['clientData']['clientLevel'] < 2 || !$_SESSION['loggedin']) {
                   } ?>">
                <fieldset>
                   <legend>
-                     Delete inventory:
+                     This will be deleted from inventory:
                   </legend>
                   <div>
                      <label for="invMake">Make:</label><br>

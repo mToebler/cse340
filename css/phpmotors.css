@@ -319,6 +319,13 @@ em {
    color: var(--dark_blue);
 }
 
+em > p {
+   font-style: normal;
+   color: var(--near_black);
+   margin-top: 0.2em;
+   margin-bottom: 0.2em;
+}
+
 .err {
    font-family: var(--title_font);
    font-size: small;
@@ -363,4 +370,9 @@ td {
 
 td>a {
    color: var(--dark_blue);
+}
+
+.info {
+margin: 1em;
+color: var(--near_black);
 }

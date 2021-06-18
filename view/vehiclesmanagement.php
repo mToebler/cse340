@@ -47,12 +47,12 @@ if (isset($_SESSION['message'])) {
                <h2>Select management option:</h2>
                <p><a href="/phpmotors/vehicles/index.php?action=classification">Add classification</a></p>
                <p><a href="/phpmotors/vehicles/index.php?action=inventory">Add inventory</a></p>
-               <?php
-               if (isset($message)) {
-                  echo "<div class='err'>$message</div>";
-               }
+               <?php              
                if (isset($classificationList)) {
                   echo '<h2>Vehicles By Classification</h2>';
+                  if (isset($message)) {
+                     echo "<div class='err'>$message</div>";
+                  }
                   echo '<p>Choose a classification to see those vehicles</p>';
                   echo $classificationList;
                }
