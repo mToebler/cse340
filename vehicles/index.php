@@ -40,9 +40,9 @@ if ($action == NULL) {
 
 
 switch ($action) {
-   case 'classification':
-      include "$root/phpmotors/view/classification.php";
-      break;
+      case 'classification':
+         include "$root/phpmotors/view/classification.php";
+         break;
 
    case 'inventory':
       include "$root/phpmotors/view/inventory.php";
@@ -190,7 +190,7 @@ switch ($action) {
    case 'deleteVehicle':
       $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
       $invMake = trim(filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_STRING));
-      $invModel = trim(filter_input(INPUT_POST, 'invModel', FILTER_SANITIZE_STRING));      
+      $invModel = trim(filter_input(INPUT_POST, 'invModel', FILTER_SANITIZE_STRING));
 
       //NOTE: Custom validation functions
       $colorMatch = checkColor($invColor);
@@ -211,6 +211,22 @@ switch ($action) {
          exit;
       }
       break;
+
+   case 'viewClassification':
+      $classificationName = filter_input(INPUT_GET, 'classificationName', FILTER_SANITIZE_STRING);
+      $vehicles = getVehiclesByClassification($classificationName);
+      if (!count($vehicles)) {
+         $message = "<p class='notice'>Sorry, no $classificationName vehicles could be found.</p>";
+      } else {
+         $vehicleDisplay = buildVehiclesDisplay($vehicles);
+         
+         // echo $vehicleDisplay;
+         // exit;
+      }
+
+      include '../view/viewClassification.php';
+      break;
+
 
    default:
       $classificationList = buildClassificationList($classifications);

@@ -108,11 +108,11 @@ if (!isset($classificationId) && !isset($selectedClassification)) {
                   </div>
                   <div>
                      <label for="invImage">Image:</label><br>
-                     <input type="text" id="invImage" name="invImage" value="/phpmotors/images/no-image.png" required>
+                     <input type="text" id="invImage" name="invImage" <? if(isset($invImage)) echo "value='$invImage'" ; else if(isset($invInfo['invImage'])) echo "value='$invInfo[invImage]'" ; else echo "value='/phpmotors/images/no-image.png'"?>  required>
                   </div>
                   <div>
                      <label for="invThumbnail">Thumbnail:</label><br>
-                     <input type="text" id="invThumbnail" name="invThumbnail" value="/phpmotors/images/no-image.png" required>
+                     <input type="text" id="invThumbnail" name="invThumbnail" <? if(isset($invThumbnail)) echo "value='$invThumbnail'" ; else if(isset($invInfo['invThumbnail'])) echo "value='$invInfo[invThumbnail]'" ; else echo "value='/phpmotors/images/no-image.png'"?> required>
                   </div>
                   <div>
                      <label for="invPrice">Price:</label><br>

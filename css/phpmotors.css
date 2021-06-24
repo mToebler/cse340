@@ -21,6 +21,18 @@
 
 /* font-family: 'New Tegomin', serif; */
 
+/**
+NEW STUFF WEEK10 from activities. You may or may not want this
+*/
+
+html {
+   box-sizing: border-box;
+}
+
+*, *:before, *:after {
+   box-sizing: inherit;
+}
+
 body {
    display: flex;
    flex-direction: column;
@@ -164,7 +176,7 @@ article {
 }
 
 #delorean {
-   background-image: url("/phpmotors/images/delorean.jpg");
+   background-image: url("/phpmotors/images/vehicles/delorean.jpg");
    background-size: contain;
    background-repeat: no-repeat;
    background-position-y: center;
@@ -219,6 +231,24 @@ article>div>img {
    justify-content: flex-start;
 }
 
+#inv-display {
+   margin: 0;
+   padding: 0;
+   display: flex;
+   flex-direction: column;
+}
+
+#inv-display li {
+   margin-bottom: .5em;
+   border: 1px #ccc solid;
+   list-style-type: none;
+   flex: 1 1 auto;
+}
+
+#inv-display li img {
+   max-width: 100%;
+}
+
 @media screen and (min-width: 480px) {
    article>input {
       border: 1px;
@@ -229,7 +259,7 @@ article>div>img {
       padding-top: 0%;
    }
    #delorean {
-      background-image: url("/phpmotors/images/delorean.jpg");
+      background-image: url("/phpmotors/images/vehicles/delorean.jpg");
       /* background-size: 75%; */
       background-size: contain;
       background-repeat: no-repeat;
@@ -256,6 +286,31 @@ article>div>img {
    .upgrades {
       order: 1;
    }
+
+   /* For vehicle display in classification view */
+	#inv-display {
+		flex-flow: row wrap;
+		justify-content: flex-start;
+	}
+
+	#inv-display h2{
+		font-size: 1rem;
+	}
+
+	#inv-display li {
+		max-width: 200px;
+		flex: 1 0 auto;
+		text-align: center;
+		height: 250px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+      
+	#inv-display div {
+		width: 100%;
+   }
+   
 }
 
 legend {
@@ -319,7 +374,10 @@ em {
    color: var(--dark_blue);
 }
 
-em > p {
+/* #updatePasswordForm_p */
+
+em+p {
+   font-size: smaller;
    font-style: normal;
    color: var(--near_black);
    margin-top: 0.2em;
@@ -373,6 +431,6 @@ td>a {
 }
 
 .info {
-margin: 1em;
-color: var(--near_black);
+   margin: 1em;
+   color: var(--near_black);
 }

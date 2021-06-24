@@ -52,7 +52,7 @@ function buildNav($navArray)
    $navList = '';
    $navList .= "<div><a href='/phpmotors/index.php' title='View the PHP Motors home page'>Home</a></div>";
    foreach ($navArray as $classification) {
-      $navList .= "<div><a href='/phpmotors/index.php?action=" . urlencode($classification['classificationName']) . "' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></div>";
+      $navList .= "<div><a href='/phpmotors/vehicles/index.php?action=viewClassification&classificationName=" . urlencode($classification['classificationName']) . "' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></div>";
    }
    $navList .= '';
 
@@ -124,14 +124,30 @@ function buildClassificationList($classifications)
 }
 
 // Get vehicles by classificationId 
-function getInventoryByClassification($classificationId){ 
-   $db = phpmotorsConnect(); 
-   $sql = ' SELECT * FROM inventory WHERE classificationId = :classificationId'; 
-   $stmt = $db->prepare($sql); 
-   $stmt->bindValue(':classificationId', $classificationId, PDO::PARAM_INT); 
-   $stmt->execute(); 
+function getInventoryByClassification($classificationId)
+{
+   $db = phpmotorsConnect();
+   $sql = ' SELECT * FROM inventory WHERE classificationId = :classificationId';
+   $stmt = $db->prepare($sql);
+   $stmt->bindValue(':classificationId', $classificationId, PDO::PARAM_INT);
+   $stmt->execute();
    // Requests a multi-dimensional array of the vehicles as an associative array
-   $inventory = $stmt->fetchAll(PDO::FETCH_ASSOC); 
-   $stmt->closeCursor(); 
-   return $inventory; 
-  }
+   $inventory = $stmt->fetchAll(PDO::FETCH_ASSOC);
+   $stmt->closeCursor();
+   return $inventory;
+}
+
+function buildVehiclesDisplay($vehicles)
+{
+   $dv = '<ul id="inv-display">';
+   foreach ($vehicles as $vehicle) {
+      $dv .= '<li>';
+      $dv .= "<img src='$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
+      $dv .= '<hr>';
+      $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
+      $dv .= "<span>$vehicle[invPrice]</span>";
+      $dv .= '</li>';
+   }
+   $dv .= '</ul>';
+   return $dv;
+}

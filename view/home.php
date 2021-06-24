@@ -37,7 +37,7 @@
       <article id="delorean">
          <h3>DMC Delorean</h3>
          <p>3 Cup holders<br>Superman doors<br>Fuzzy dice!</p>
-         <!-- <img class="hero_img" src="<?=$img_root?>/delorean.jpg" alt="DMC Delorean"> -->
+         <!-- <img class="hero_img" src="<?=$img_root?>/vehicles/delorean.jpg" alt="DMC Delorean"> -->
          <!-- <btn src="<?=$img_root?>/site/own_today.png"> -->
          <input type="image" name="own_today" src="<?=$img_root?>/site/own_today.png" alt="Own Today">
       </article>

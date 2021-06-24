@@ -3,6 +3,7 @@
 session_start();
 $root = $_SERVER['DOCUMENT_ROOT'];
 require_once "$root/phpmotors/library/connections.php";
+require_once "$root/phpmotors/library/functions.php";
 require_once "$root/phpmotors/model/main-model.php";
 
 // Get the array of classifications
@@ -12,12 +13,7 @@ $classifications = getClassifications();
 // 	exit;
 
 // Build a navigation bar using the $classifications array
-$navList = '';
-$navList .= "<div><a href='/phpmotors/index.php' title='View the PHP Motors home page'>Home</a></div>";
-foreach ($classifications as $classification) {
-   $navList .= "<div><a href='/phpmotors/index.php?action=" . urlencode($classification['classificationName']) . "' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></div>";
-}
-$navList .= '';
+$navList = buildNav($classifications);
 
 // echo $navList;
 // exit;

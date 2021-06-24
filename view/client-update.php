@@ -81,7 +81,7 @@ $cliInfo = $_SESSION['clientData'];
             }
             ?>
             <form action="/phpmotors/accounts/index.php" id="updatePasswordForm" method="POST">
-               <input type="hidden" id="action" name="action" value="updatePassword">
+               <input type="hidden" id="pwaction" name="action" value="updatePassword">
                <input type="hidden" name="clientId" value="<?php if (isset($cliInfo['clientId'])) {
                                                             echo $cliInfo['clientId'];
                                                          } ?>">
@@ -92,7 +92,7 @@ $cliInfo = $_SESSION['clientData'];
                   <div>
                      <label for="clientPassword">New Password:</label><br>
                      <input type="password" id="clientPassword" name="clientPassword" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required><br>
-                     <em>This will replace your current password.<p>Remember, passwords must be at least 8 characters and contain at least 1 number, 1 capital letter, and 1 special character.</p></em>
+                     <em>This will replace your current password.</em><p class="updatePasswordForm_p">Remember, passwords must be at least 8 characters and contain at least 1 number, 1 capital letter, and 1 special character.</p>
                   </div>
                </fieldset>
                <button type="submit">Change Password</button>
