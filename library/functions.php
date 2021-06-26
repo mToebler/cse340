@@ -142,12 +142,39 @@ function buildVehiclesDisplay($vehicles)
    $dv = '<ul id="inv-display">';
    foreach ($vehicles as $vehicle) {
       $dv .= '<li>';
+      $dv .= "<a href='/phpmotors/vehicles/?action=display&vehicleMake=$vehicle[invMake]&vehicleId=$vehicle[invId]'>";
       $dv .= "<img src='$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
+      $dv .= "</a>";
       $dv .= '<hr>';
+      $dv .= "<a href='/phpmotors/vehicles/?action=display&vehicleMake=$vehicle[invMake]&vehicleId=$vehicle[invId]'>";
       $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
+      $dv .= "</a>";
       $dv .= "<span>$vehicle[invPrice]</span>";
       $dv .= '</li>';
    }
    $dv .= '</ul>';
+   return $dv;
+}
+
+function buildVehicleDisplay($vehicle) {
+   // there should only be one record in vehicle as supplied
+   // formatted price
+   $formattedPrice = number_format($vehicle['invPrice']);
+   $dv = "";
+   $dv .= '<div class="vehicle_display">';   
+   $dv .= '<div class="vehicle_display_item">';
+   $dv .= "<img src='$vehicle[invImage]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
+   $dv .= '</div>';
+   $dv .= '<div class="vehicle_display_item">';
+   $dv .= "<h2 >$vehicle[invMake] $vehicle[invModel] Details</h2>";
+   $dv .= "<span>$vehicle[invDescription]</span>";
+   $dv .= "<div class='space_above'><p>This $vehicle[invModel] is this <span style='color: $vehicle[invColor];font-weight: bolder;'> Color</span>.</p></div><br>";   
+   $dv .= "<span># in Stock: $vehicle[invStock]</span>";   
+   $dv .= '</div>';
+   $dv .= '</div>';
+   $dv .= '<div class="vehicle_display_item">';
+   $dv .= "<p class='price'>Price: $$formattedPrice</p>";
+   $dv .= '</div>';
+   
    return $dv;
 }

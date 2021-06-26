@@ -166,3 +166,15 @@ function getVehiclesByClassification($classificationName)
     $stmt->closeCursor();
     return $vehicles;
 }
+
+function getVehicleByMakeAndId($invMake, $invId) {
+    $db = phpmotorsConnect();
+    $sql = 'SELECT * FROM inventory WHERE invId = :invId and invMake = :invMake';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+    $stmt->bindValue(':invMake', $invMake, PDO::PARAM_STR);    
+    $stmt->execute();
+    $vehicle = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $vehicle;
+}

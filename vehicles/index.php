@@ -40,9 +40,9 @@ if ($action == NULL) {
 
 
 switch ($action) {
-      case 'classification':
-         include "$root/phpmotors/view/classification.php";
-         break;
+   case 'classification':
+      include "$root/phpmotors/view/classification.php";
+      break;
 
    case 'inventory':
       include "$root/phpmotors/view/inventory.php";
@@ -219,12 +219,29 @@ switch ($action) {
          $message = "<p class='notice'>Sorry, no $classificationName vehicles could be found.</p>";
       } else {
          $vehicleDisplay = buildVehiclesDisplay($vehicles);
-         
+
          // echo $vehicleDisplay;
          // exit;
       }
 
       include '../view/viewClassification.php';
+      break;
+
+   case 'display':
+      $invMake = filter_input(INPUT_GET, 'vehicleMake', FILTER_SANITIZE_STRING);
+      $invId = filter_input(INPUT_GET, 'vehicleId', FILTER_SANITIZE_NUMBER_INT);
+      $vehicle = getVehicleByMakeAndId($invMake, $invId);
+      // var_dump($vehicle);
+      if (!count($vehicle)) {
+         $message = "<p class='notice'>Sorry, no $invMake vehicle like that could be found.</p>";
+      } else {
+         $vehicleDisplay = buildVehicleDisplay($vehicle[0]);
+
+         // echo $vehicleDisplay;
+         // exit;
+      }
+
+      include '../view/viewInventory.php';
       break;
 
 

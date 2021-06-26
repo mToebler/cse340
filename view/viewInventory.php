@@ -1,5 +1,5 @@
 <?php
-// NOTE: THIS WAS ORIGINALLY CALLED classification in the activity.
+// NOTE: Inventory VIEW not admin inventory.
 $img_root = "/phpmotors/images";
 // echo $navList;
 ?>
@@ -8,7 +8,7 @@ $img_root = "/phpmotors/images";
 <html lang="en">
 
 <head>
-   <title><?php echo $classificationName; ?> vehicles | PHP Motors, Inc.</title>
+   <title><?php echo $invMake ." ". $invModel; ?> | PHP Motors, Inc.</title>
    <meta charset="utf-8">
    <meta name="description" content="PHP Motors for CSE340">
    <meta name="author" content="Mark Tobler">
@@ -30,8 +30,8 @@ $img_root = "/phpmotors/images";
          ?>
       </nav>
       <main>
-         <section>
-            <h1><?php echo $classificationName; ?> vehicles</h1>
+         <section>            
+            <h1><?php echo $vehicle[0]['invMake']. ' ' . $vehicle[0]['invModel'];?></h1>
             <?php if (isset($message)) {
                echo $message;
             }
