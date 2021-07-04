@@ -35,10 +35,17 @@ $img_root = "/phpmotors/images";
             <?php if (isset($message)) {
                echo $message;
             }
+            ?>
+            <div class='bigContainer'>
+            <?
+            if (isset($thumbsDisplay)) {
+               echo $thumbsDisplay;
+            }
             if (isset($vehicleDisplay)) {
                echo $vehicleDisplay;
-            }
+            }            
             ?>
+            </div>
          </section>
       </main>
       <footer>

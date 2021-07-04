@@ -158,7 +158,7 @@ function getInvItemInfo($invId)
 function getVehiclesByClassification($classificationName)
 {
     $db = phpmotorsConnect();
-    $sql = 'SELECT * FROM inventory WHERE classificationId IN (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName)';
+    $sql = "select distinct inv.*, i.imgPath from inventory inv, images i where inv.invId = i.invId and inv.classificationId in (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName) and i.imgPath like '%-tn.%' and i.imgPrimary = 1";
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':classificationName', $classificationName, PDO::PARAM_STR);
     $stmt->execute();
@@ -169,12 +169,24 @@ function getVehiclesByClassification($classificationName)
 
 function getVehicleByMakeAndId($invMake, $invId) {
     $db = phpmotorsConnect();
-    $sql = 'SELECT * FROM inventory WHERE invId = :invId and invMake = :invMake';
+    $sql = "SELECT inv.*, i.imgPath FROM inventory inv, images i WHERE inv.invId = i.invId AND inv.invId = :invId AND i.imgPath NOT LIKE '%-tn.%' AND i.imgPrimary = 1";
+    // $sql = 'SELECT * FROM inventory WHERE invId = :invId and invMake = :invMake';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
-    $stmt->bindValue(':invMake', $invMake, PDO::PARAM_STR);    
+    //$stmt->bindValue(':invMake', $invMake, PDO::PARAM_STR);    
     $stmt->execute();
     $vehicle = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
     return $vehicle;
+}
+
+// Get information for all vehicles
+function getVehicles(){
+	$db = phpmotorsConnect();
+	$sql = 'SELECT invId, invMake, invModel FROM inventory';
+	$stmt = $db->prepare($sql);
+	$stmt->execute();
+	$invInfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$stmt->closeCursor();
+	return $invInfo;
 }

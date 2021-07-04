@@ -7,6 +7,7 @@ require_once "$root/phpmotors/library/connections.php";
 require_once "$root/phpmotors/library/functions.php";
 require_once "$root/phpmotors/model/main-model.php";
 require_once "$root/phpmotors/model/vehicles-model.php";
+require_once "$root/phpmotors/model/uploads-model.php";
 
 // Get the array of classifications
 $classifications = getClassifications();
@@ -231,13 +232,15 @@ switch ($action) {
       $invMake = filter_input(INPUT_GET, 'vehicleMake', FILTER_SANITIZE_STRING);
       $invId = filter_input(INPUT_GET, 'vehicleId', FILTER_SANITIZE_NUMBER_INT);
       $vehicle = getVehicleByMakeAndId($invMake, $invId);
+      $thumbsArray = getThumbsById($invId);
       // var_dump($vehicle);
       if (!count($vehicle)) {
          $message = "<p class='notice'>Sorry, no $invMake vehicle like that could be found.</p>";
       } else {
          $vehicleDisplay = buildVehicleDisplay($vehicle[0]);
 
-         // echo $vehicleDisplay;
+         $thumbsDisplay = buildThumbsDisplay($thumbsArray);
+         // echo $thumbsDisplay;
          // exit;
       }
 
