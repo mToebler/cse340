@@ -142,3 +142,17 @@ MODIFY `clientId` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+CREATE TABLE `reviews` (
+  `reviewId` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `reviewText` text NOT NULL,
+  `reviewDate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `invId` int(11) NOT NULL,
+  `clientId` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`reviewId`),
+  KEY `review_rfk_1` (`invId`),
+  KEY `review_rfk_2` (`clientId`),
+  CONSTRAINT `review_rfk_1` FOREIGN KEY (`invId`) REFERENCES `inventory` (`invId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `review_rfk_2` FOREIGN KEY (`clientId`) REFERENCES `clients` (`clientId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1
