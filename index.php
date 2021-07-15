@@ -3,14 +3,14 @@
 
 /// NOTE: HEROKU: need to do environment vars for database connection. 
 session_start();
-// getenv();
-// phpinfo();
-// // echo $_ENV["USER"];
-// var_dump($_ENV);
-// exit;
 $root = $_SERVER['DOCUMENT_ROOT'];
-echo $root;
-exit;
+$envTest = getenv('REMOTE');
+if($envTest) {
+   $root = "app/phpmotors";
+}
+
+
+
 require_once "$root/phpmotors/library/connections.php";
 require_once "$root/phpmotors/library/functions.php";
 require_once "$root/phpmotors/model/main-model.php";
