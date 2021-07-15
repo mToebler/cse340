@@ -5,15 +5,18 @@
 session_start();
 $root = $_SERVER['DOCUMENT_ROOT'];
 $envTest = getenv('REMOTE');
-if($envTest) {
-   $root = "app/phpmotors";
+if(!$envTest) {
+   $root = "/Applications/XAMPP/xamppfiles/htdocs/phpmotors";
 }
 var_dump($root);
 var_dump($envTest);
-exit;
-require_once "$root/phpmotors/library/connections.php";
-require_once "$root/phpmotors/library/functions.php";
-require_once "$root/phpmotors/model/main-model.php";
+//exit;
+require_once "$root/library/connections.php";
+require_once "$root/library/functions.php";
+require_once "$root/model/main-model.php";
+// require_once "$root/phpmotors/library/connections.php";
+// require_once "$root/phpmotors/library/functions.php";
+// require_once "$root/phpmotors/model/main-model.php";
 
 // Get the array of classifications
 $classifications = getClassifications();
