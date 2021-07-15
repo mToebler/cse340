@@ -9,6 +9,8 @@ session_start();
 // var_dump($_ENV);
 // exit;
 $root = $_SERVER['DOCUMENT_ROOT'];
+echo $root;
+exit;
 require_once "$root/phpmotors/library/connections.php";
 require_once "$root/phpmotors/library/functions.php";
 require_once "$root/phpmotors/model/main-model.php";
