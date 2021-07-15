@@ -5,8 +5,6 @@
 session_start();
 $root = $_SERVER['DOCUMENT_ROOT'];
 $envTest = getenv('REMOTE');
-var_dump($root);
-var_dump($envTest);
 //exit;
 require_once "$root/phpmotors/library/connections.php";
 require_once "$root/phpmotors/library/functions.php";
