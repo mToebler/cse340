@@ -8,9 +8,9 @@ $envTest = getenv('REMOTE');
 if($envTest) {
    $root = "app/phpmotors";
 }
-
-
-
+var_dump($root);
+var_dump($envTest);
+exit;
 require_once "$root/phpmotors/library/connections.php";
 require_once "$root/phpmotors/library/functions.php";
 require_once "$root/phpmotors/model/main-model.php";
