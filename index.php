@@ -1,6 +1,13 @@
 <?php
 // Create or access a Session
+
+/// NOTE: HEROKU: need to do environment vars for database connection. 
 session_start();
+// getenv();
+// phpinfo();
+// // echo $_ENV["USER"];
+// var_dump($_ENV);
+// exit;
 $root = $_SERVER['DOCUMENT_ROOT'];
 require_once "$root/phpmotors/library/connections.php";
 require_once "$root/phpmotors/library/functions.php";
