@@ -8,7 +8,7 @@ $img_root = "/phpmotors/images";
 <html lang="en">
 
 <head>
-   <title><?php echo $invMake ." ". $invModel; ?> | PHP Motors, Inc.</title>
+   <title> PHP Motors, Inc.</title>
    <meta charset="utf-8">
    <meta name="description" content="PHP Motors for CSE340">
    <meta name="author" content="Mark Tobler">
