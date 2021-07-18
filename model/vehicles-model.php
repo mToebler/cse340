@@ -158,7 +158,15 @@ function getInvItemInfo($invId)
 function getVehiclesByClassification($classificationName)
 {
     $db = phpmotorsConnect();
-    $sql = "select distinct inv.*, i.imgPath from inventory inv, images i where inv.invId = i.invId and inv.classificationId in (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName) and i.imgPath like '%-tn.%' and i.imgPrimary = 1";
+    // $sql = "select distinct inv.*, i.imgPath from inventory inv, images i where inv.invId = i.invId and inv.classificationId in (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName) and i.imgPath like '%-tn.%' and i.imgPrimary = 1";
+    // this is my super query to bring in reviewcount here.
+    $sql = "SELECT DISTINCT inv.*, i.imgPath, r.count "
+         . "FROM inventory inv JOIN images i ON inv.invId = i.invId " 
+         . "LEFT JOIN (SELECT invid, COUNT(*) AS `count` FROM reviews GROUP BY invid) r ON inv.invId = r.invId "
+         . "WHERE inv.classificationId IN "
+         . "(SELECT classificationId FROM carclassificatiON WHERE classificationName = :classificationName) "
+         . "AND i.imgPath LIKE '%-tn.%' AND i.imgPrimary = 1 ";
+
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':classificationName', $classificationName, PDO::PARAM_STR);
     $stmt->execute();

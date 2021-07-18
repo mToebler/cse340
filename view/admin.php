@@ -60,6 +60,7 @@ if (!$_SESSION['loggedin']) {
                <h2>Account Management</h2>
                <p class='info'>Update account information using link below. Clearly the link text itself isn't enough to guide you, right?</p>
                <p><a href="/phpmotors/accounts/?action=update">Update Account Management</a></p>
+               <p><a href="/phpmotors/reviews/?action=manage">Review Your Reviews</a></p>
             </article>
             <?php
                if ($_SESSION['clientData']['clientLevel'] > 1) {

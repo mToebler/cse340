@@ -8,6 +8,7 @@ require_once "$root/phpmotors/library/functions.php";
 require_once "$root/phpmotors/model/main-model.php";
 require_once "$root/phpmotors/model/vehicles-model.php";
 require_once "$root/phpmotors/model/uploads-model.php";
+require_once "$root/phpmotors/model/reviews-model.php";
 
 // Get the array of classifications
 $classifications = getClassifications();
@@ -231,17 +232,27 @@ switch ($action) {
    case 'display':
       $invMake = filter_input(INPUT_GET, 'vehicleMake', FILTER_SANITIZE_STRING);
       $invId = filter_input(INPUT_GET, 'vehicleId', FILTER_SANITIZE_NUMBER_INT);
+      $isMessage = filter_input(INPUT_GET, 'ismessage', FILTER_SANITIZE_NUMBER_INT);
       $vehicle = getVehicleByMakeAndId($invMake, $invId);
       $thumbsArray = getThumbsById($invId);
+      $reviewArray = getReviews($invId);
+      // var_dump($reviewArray); exit;
       // var_dump($vehicle);
       if (!count($vehicle)) {
          $message = "<p class='notice'>Sorry, no $invMake vehicle like that could be found.</p>";
       } else {
          $vehicleDisplay = buildVehicleDisplay($vehicle[0]);
 
-         $thumbsDisplay = buildThumbsDisplay($thumbsArray);
+         $thumbsDisplay = buildThumbsDisplay($thumbsArray);         
          // echo $thumbsDisplay;
          // exit;
+
+         $reviewsDisplay = buildReviewsDisplay($reviewArray);
+      }
+
+      if ($isMessage && empty($message) && key_exists('message', $_SESSION)) {
+         $message = $_SESSION['message']; // || '';
+         unset($_SESSION['message']);
       }
 
       include '../view/viewInventory.php';

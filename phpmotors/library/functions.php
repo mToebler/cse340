@@ -142,6 +142,7 @@ function buildVehiclesDisplay($vehicles)
    $dv = '<ul id="inv-display">';
    foreach ($vehicles as $vehicle) {
       $price =  number_format($vehicle['invPrice']);
+      $count = $vehicle['count'] == null ? 0 : $vehicle['count'];
       $dv .= '<li>';
       $dv .= "<a href='/phpmotors/vehicles/?action=display&vehicleMake=$vehicle[invMake]&vehicleId=$vehicle[invId]'>";
       $dv .= "<img src='$vehicle[imgPath]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
@@ -150,6 +151,7 @@ function buildVehiclesDisplay($vehicles)
       $dv .= "<a href='/phpmotors/vehicles/?action=display&vehicleMake=$vehicle[invMake]&vehicleId=$vehicle[invId]'>";
       $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
       $dv .= "</a>";
+      $dv .= "<span class='smallPunch'>($count Reviews)</span>";
       $dv .= "<span>$$price</span>";
       $dv .= '</li>';
    }
@@ -356,4 +358,66 @@ function buildThumbsDisplay($thumbsArray)
       $thumbs .= '</div>';
    }
    return $thumbs;
+}
+
+
+function getUserDisplayName()
+{
+   $name = 'Not Logged In';
+   if ($_SESSION['loggedin']) {
+      // substr($_SESSION['clientData']['clientFirstname'], 0, 1) . $_SESSION['clientData']['clientLastname'];
+      $name =  getDisplayName($_SESSION['clientData']['clientFirstname'], $_SESSION['clientData']['clientLastname']);
+   }
+   return $name;
+}
+
+function getDisplayName($fn, $ln)
+{
+   return substr($fn, 0, 1) . $ln;
+}
+
+function buildReviewsDisplay($rArray)
+{
+   $reviews = '<ul id="review_display">';
+   $noReviews = '<li><hr><h5>No reviews</h5><hr></li>';
+   $innerReviews = '';
+      foreach ($rArray as $review) {
+         $displayName = getDisplayName($review['firstname'], $review['lastname']);
+         $innerReviews .= '<li>';
+         $innerReviews .= '<hr>';
+         $innerReviews .= "<h5>$displayName at " . $review['reviewDate'] . " wrote:</h5>";
+         $innerReviews .= "<span>" . $review['reviewText'] . "</span>";
+         $innerReviews .= '</li>';
+      }
+   if ($innerReviews == '') $reviews .= $noReviews;
+   else $reviews .= $innerReviews; 
+         
+   $reviews .= '</ul>';
+
+   return $reviews;
+}
+
+function buildReviewsDisplayForUser($rArray)
+{
+   $reviews = '<ul id="review_display">';
+   $noReviews = '<li><hr><h5>No reviews</h5><hr></li>';
+   $innerReviews = '';
+   foreach ($rArray as $review) {
+      $displayName = $review['make'] . ' ' . $review['model'];
+      $innerReviews .= '<li>';
+      $innerReviews .= '<hr>';
+      $innerReviews .= "<h5>$displayName at " . $review['reviewDate'] . ":</h5>"; 
+      $innerReviews .= "<span>" . $review['reviewText'] . "</span>";
+      $innerReviews .= "<div class='mini'>";
+      $innerReviews .= "<span class='modReview'><a href='/phpmotors/reviews?action=mod&id=$review[reviewId]' title='Click to modify'>Modify</a></span>";
+      $innerReviews .= "<span class='modReview'><a href='/phpmotors/reviews?action=del&id=$review[reviewId]' title='Click to delete'>Delete</a></span>";
+      $innerReviews .= "<span class='modReview'><a href='/phpmotors/vehicles?action=display&vehicleMake=$review[make]&vehicleId=$review[invId]' title='Click to delete'>View</a></span>";
+      $innerReviews .= "</div>";
+      $innerReviews .= '</li>';
+   }
+   if ($innerReviews == '') $reviews .= $noReviews;
+   else $reviews .= $innerReviews; 
+
+   $reviews .= '</ul>';
+   return $reviews;
 }

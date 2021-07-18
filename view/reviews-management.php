@@ -1,6 +1,11 @@
 <?php
-   $img_root = "/phpmotors/images";
-   echo $navList;
+   $img_root = "/phpmotors/images";   
+
+   if (!$_SESSION['loggedin']) {
+      header("Location: /phpmotors/index.php ");
+      exit;
+   }
+   
 ?>
 <!doctype html>
 
@@ -13,7 +18,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="preconnect" href="https://fonts.gstatic.com">
    <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
-   <link rel="stylesheet" href="css/phpmotors.css" media="screen">
+   <link rel="stylesheet" href="../css/phpmotors.css" media="screen">
 
 </head>
 <body>
@@ -28,7 +33,10 @@
 <main>
    <section>
       <h1>Reviews Management</h1>
-      <!--Placeholder for future content<article><h2></h2></article>-->
+      <div class='minor_side_margins'>
+      <? if (isset($message)) echo "<span class='err'>$message</span><hr>"; ?>
+      <?=$displayReviews?>
+      </div>
    </section>
 </main>
 <footer>

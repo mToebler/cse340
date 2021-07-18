@@ -7,6 +7,7 @@ require_once "$root/phpmotors/library/connections.php";
 require_once "$root/phpmotors/library/functions.php";
 require_once "$root/phpmotors/model/main-model.php";
 require_once "$root/phpmotors/model/reviews-model.php";
+require_once "$root/phpmotors/model/review-entity.php";
 
 // Get the array of classifications
 $classifications = getClassifications();
@@ -26,58 +27,119 @@ if ($action == NULL) {
 
 
 switch ($action) {
-   case 'reviews':
-      include "$root/phpmotors/view/reviews.php";
+   case 'post':   // create
+      // var_dump($_SESSION['clientdata']); exit;
+      $invId = trim(filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT));
+      $invMake = trim(filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_NUMBER_INT));
+      $reviewText = trim(filter_input(INPUT_POST, 'reviewText', FILTER_SANITIZE_STRING));
+      $clientId;
+      if (key_exists('loggedin', $_SESSION) && $_SESSION['loggedin']) {
+         // need to get client id from session rather than form. Also client review name.
+         // $clientId = $_SESSION['clientdata']['clientId'];
+         $clientData = $_SESSION['clientData'];
+         $clientId = $clientData['clientId'];
+
+         if (empty($reviewText) || $clientId == null) {
+            $_SESSION['message'] = '<p>Please submit an actual review</p>';
+            header("Location: /phpmotors/vehicles/?action=display&vehicleMake=$invMake&vehicleId=$invId&ismessage=1");
+            break;
+         }
+         $review = new Review($reviewText, $invId, $clientId);
+         $result = insertReview($review);
+
+         if ($result === 1) {
+            $_SESSION['message'] = "<div><p>Review added.</p></div>";
+            //clearing out all variables:            
+            unset($reviewText);
+            header("Location: /phpmotors/vehicles/index.php?action=display&vehicleMake=$invMake&vehicleId=$invId&ismessage=1");
+            exit;
+         }
+      } else {
+         $_SESSION['message'] = '<p>You must be <a href="../?action=Login">logged</a> in to submit a review.</p>';
+         header("Location: /phpmotors/vehicles/?action=display&vehicleMake=$invMake&vehicleId=$invId&ismessage=1");
+         break;
+      }
       break;
 
-   case 'createReview':
-      $invMake = trim(filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_STRING));
-      $invModel = trim(filter_input(INPUT_POST, 'invModel', FILTER_SANITIZE_STRING));
-      $invDescription = trim(filter_input(INPUT_POST, 'invDescription', FILTER_SANITIZE_STRING));
-      $invImage = trim(filter_input(INPUT_POST, 'invImage', FILTER_SANITIZE_STRING));
-      $invThumbnail = trim(filter_input(INPUT_POST, 'invThumbnail', FILTER_SANITIZE_STRING));
-      $invPrice = trim(filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_NUMBER_INT, FILTER_FLAG_ALLOW_FRACTION));
-      $invStock = trim(filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_INT));
-      $invColor = trim(filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_STRING));
-      $classificationId = trim(filter_input(INPUT_POST, 'classificationId', FILTER_SANITIZE_NUMBER_INT));
+   case 'manage':   // manage reviews
+      if (key_exists('loggedin', $_SESSION) && $_SESSION['loggedin']) {
+         $clientData = $_SESSION['clientData'];
+         $clientId = $clientData['clientId'];
 
-      //NOTE: Custom validation functions
-      $colorMatch = checkColor($invColor);
-      $classIdMatch = isPropertyInArray($classificationId, "classificationId", $classifications);
-
-
-      if (
-         empty($invMake) || empty($invModel) || empty($invDescription) ||
-         empty($invImage) || empty($invThumbnail) || empty($invPrice) ||
-         empty($invStock) || !$colorMatch || !$classIdMatch
-      ) {
-         $message = '<p>All fields require valid values</p>';
-         include "$root/phpmotors/view/inventory.php";
-         exit;
+         $userreviews = getUserReviews($clientId);
+         $displayReviews = buildReviewsDisplayForUser($userreviews);
+         include "$root/phpmotors/view/reviews-management.php";
+         break;
+      } else {
+         error_log('redirecting to vehicles. not logged in');
+         $_SESSION['message'] = '<p>You must be <a href="../?action=Login">logged in</a> to manage reviews.</p>';
+         header("Location: /phpmotors/vehicles/?action=display&ismessage=1");
+         break;
       }
-      $invOutcome = addInventory($invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId);
-      // Check and report the result
+      break;
 
-      if ($invOutcome === 1) {
-         $message = "<div><p>$invMake $invModel added.</p></div>";
-         //clearing out all variables:
-         unset($invMake);
-         unset($invModel);
-         unset($invDescription);
-         unset($invPrice);
-         unset($invImage);
-         unset($invThumbnail);
-         unset($invStock);
-         unset($invColor);
-         unset($classificationId);
-         include "$root/phpmotors/view/inventory.php";
+   case 'del': // delete review
+      $reviewId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+      if (key_exists('loggedin', $_SESSION) && $_SESSION['loggedin']) {
+         $clientData = $_SESSION['clientData'];
+         $clientId = $clientData['clientId'];
+         // only the owner or admin can delete review
+         $deleteResult = deleteReview($reviewId, $clientId);
+         // Check and report the result
+         if ($deleteResult === 1) {
+            $message = "<div><p>Review deleted.</p></div>";
+         } else {
+            $message = "<p>Review could not be deleted.</p>";
+         }
+         $userreviews = getUserReviews($clientId);
+         $displayReviews = buildReviewsDisplayForUser($userreviews);
+         include "$root/phpmotors/view/reviews-management.php";
          exit;
       } else {
-         $message = "<p>Sorry, $invMake $invModel was not added to inventory. Please try again.</p>";
-         include "$root/phpmotors/view/inventory.php";
+         error_log('redirecting to vehicles. not logged in');
+         $_SESSION['message'] = '<p>You must be <a href="../?action=Login">logged in</a> to manage reviews.</p>';
+         header("Location: /phpmotors/vehicles/?action=display&ismessage=1");
          exit;
       }
       break;
+
+   case 'mod':
+      $reviewId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+      $reviewInfo = getReview($reviewId);
+      if (count($reviewInfo) < 1) {
+         $message = 'Sorry, no review found.';
+      }
+      include "$root/phpmotors/view/review.php";
+      exit;
+      break;
+
+   case 'updateReview':
+      $reviewId = filter_input(INPUT_POST, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
+      $reviewText = trim(filter_input(INPUT_POST, 'reviewText', FILTER_SANITIZE_STRING));
+      if (key_exists('loggedin', $_SESSION) && $_SESSION['loggedin']) {
+         $clientData = $_SESSION['clientData'];
+         $clientId = $clientData['clientId'];
+         // only the owner or admin can delete review
+         // echo $reviewId . ' : ' . $clientId . ' : ' . $reviewText; exit;
+         $result = updateReview($reviewId, $reviewText, $clientId);
+         // Check and report the result
+         if ($result === 1) {
+            $message = "<div><p>Review modified.</p></div>";
+         } else {
+            $message = "<p>Review could not be modified.</p>";
+         }
+         $userreviews = getUserReviews($clientId);
+         $displayReviews = buildReviewsDisplayForUser($userreviews);
+         include "$root/phpmotors/view/reviews-management.php";
+         exit;
+      } else {
+         error_log('redirecting to vehicles. not logged in');
+         $_SESSION['message'] = '<p>You must be <a href="../?action=Login">logged in</a> to manage reviews.</p>';
+         header("Location: /phpmotors/vehicles/?action=display&ismessage=1");
+         exit;
+      }
+      break;
+
       /* * ********************************** 
    * Get vehicles by classificationId 
    * Used for starting Update & Delete process 
@@ -90,17 +152,6 @@ switch ($action) {
       // Convert the array to a JSON object and send it back 
       echo json_encode($inventoryArray);
       break;
-
-   case 'modReview':
-      $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-      $invInfo = getInvItemInfo($invId);
-      if (count($invInfo) < 1) {
-         $message = 'Sorry, no vehicle information could be found.';
-      }
-      include "$root/phpmotors/view/review.php";
-      exit;
-      break;
-
    case 'updateReview':
       $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
       $invMake = trim(filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_STRING));

@@ -13,3 +13,8 @@ function submitMe() {
   
   document.querySelector("form").submit();
 }
+
+function validateSubmitReview() {
+  // if len(textElement) >  
+  $.querySelector('#reviewTextarea');
+}

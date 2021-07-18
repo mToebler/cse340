@@ -79,6 +79,11 @@ h2 {
    flex-grow: 5;
 }
 
+a > h2 {   
+   color: inherit;   
+}
+
+
 h3 {
    color: var(--dark_blue);
    font-family: var(--title_font);
@@ -152,6 +157,10 @@ footer {
 a {
    text-decoration: none;
    color: inherit;
+}
+
+li > a {
+   color: var(--dark_blue);
 }
 
 .hero_img {
@@ -243,10 +252,12 @@ article>div>img {
    border: 1px #ccc solid;
    list-style-type: none;
    flex: 1 1 auto;
+   justify-content: space-between;
 }
 
 #inv-display li img {
    max-width: 100%;
+   max-height: 23vh;
 }
 
 @media screen and (min-width: 480px) {
@@ -422,6 +433,7 @@ td {
 }
 
 td>a {
+   border: 1px var(--dark_blue) dotted;
    color: var(--dark_blue);
 }
 
@@ -503,3 +515,120 @@ td>a {
 /* .vehicle_display_item {
    
 } */
+
+.form_div {
+   display: inline-block;
+}
+
+.review_form>textarea {
+   width: 100%;
+   padding: .3rem;
+   margin: 8px 0;
+   display: inline-block;
+   border: 1px solid var(--darker_blue);
+   border-radius: 4px;
+   box-sizing: border-box;
+   height: 150px;
+   font-size: 1rem;
+   font-family: var(--body_font);
+}
+
+.review_body {
+   display: flex;
+   flex-direction: column;
+   flex-wrap: nowrap;
+   justify-content: flex-start;
+   align-content: flex-start;
+   margin: 1rem;
+}
+
+.reivew_body div
+/* , .reivew_body form  */
+
+   {
+   margin-left: 0em;
+   /* list-style-type: none; */
+   flex: 1 1 80%;
+   margin-top: 0.3em;
+   margin-bottom: 0.0em;
+   margin-left: 0.4em;
+   margin-right: 0;
+   /* margin-block-start: 0.3em;
+   margin-block-end: 0.0em;
+   margin-inline-start: 0.4em;
+   margin-inline-end: 0; */
+}
+
+#review_display {
+   margin: 0;
+   padding: 0;
+   display: flex;
+   flex-direction: column;
+}
+
+#review_display li {
+   margin-bottom: .5em;
+   /* border: 1px var(--dark_gray) solid; */
+   list-style-type: none;
+   flex: 1 1 auto;
+}
+
+#review_display span {
+   /* border: 1px var(--dark_gray) solid; */
+   font-size: medium;
+   color: var(--neon_black);
+   font-family: var(--body_font);
+   padding: 0rem .5rem;
+}
+
+#review_display span a {
+   /* border: 1px var(--dark_gray) solid; */
+   font-size: small;
+   border: 1px var(--darker_blue) dashed;
+   color: var(--dark_blue);
+   padding: 2px;
+   font-family: var(--body_font);
+}
+
+.smallmanagetext {
+   font-size: small;
+   position: relative;
+   float: right;
+}
+
+.info_text {
+   font-size: small;
+   color: var(--neon_black);
+   margin-top: 0.5rem;
+}
+
+.info_text a {
+   color: var(--dark_blue);
+}
+
+h5 {
+   font-size: larger;
+   color: var(--near_black);
+   font-family: var(--title_font);
+   margin: 0.2rem 0rem;
+   /* font-weight: bold; */
+}
+
+.blacktext {
+   color: var(--neon_black);
+}
+
+.blacktext a {
+   color: var(--dark_blue);
+}
+
+.minor_side_margins {
+   margin: 0 0.6em;
+}
+
+.smallPunch {
+   color: var(--neon_black);
+   font-size: small;
+   font-weight: bolder;
+   margin-top: -0.9rem;
+}
